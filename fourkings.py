@@ -60,10 +60,12 @@ class FourKings():
         self.parser_histo.set_defaults(func=self.histos)
 
         self.parser_zones = self.subparsers.add_parser('zones')
+        self.parser_zones.add_argument('zones', nargs='?', action="store", default='*')
         self.parser_zones.add_argument('--stake', help='stake', required=False, default='*')
         self.parser_zones.add_argument('--ticker', help='ticker', required=False, default='*')
         self.parser_zones.add_argument('--timerange', help='time range', required=False, default='1w')
         self.parser_zones.add_argument('--update', help='update', action="store_true", default=False)
+        self.parser_zones.add_argument('--list', help='list', action="store_true", default=False)
         self.parser_zones.set_defaults(func=self.zones)
 
 
@@ -297,6 +299,12 @@ class FourKings():
         #print('updated', sym, zone)
         return sym, zone
 
+
+    def zones_list(self, args):
+        for ticker in self.get_local_tickers(args):
+            if args.zones == '*' or self.tickers[ticker]['zones'][args.timerange] in args.zones:
+                print(ticker, self.tickers[ticker]['zones'][args.timerange])
+
     def zones_updates(self, args):
         _zones={}
         relevant = [symbol for symbol in self.get_local_tickers(args)]
@@ -322,6 +330,7 @@ class FourKings():
             return
 
         if args.list:
+            self.zones_list(args)
             return
 
     def histos(self, args):
