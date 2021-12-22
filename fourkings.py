@@ -4,7 +4,7 @@ import aiohttp
 import argparse
 from configobj import ConfigObj
 from binance.client import Client
-from datetime import datetime, time, timedelta
+from datetime import datetime as dtime, time, timedelta
 from prompt_toolkit import __version__ as ptk_version
 PTK3 = ptk_version.startswith('3.')
 import threading
@@ -14,6 +14,8 @@ from prompt_toolkit import prompt
 from prompt_toolkit.patch_stdout import patch_stdout
 from prompt_toolkit.history import FileHistory
 import ccxt
+import datetime
+import os
 
 import pandas as pd
 from time import sleep
@@ -47,13 +49,23 @@ class FourKings():
 
         self.parser_histo = self.subparsers.add_parser('histo')
         self.parser_histo.add_argument('--stake', help='stake', required=False, default='*')
-        self.parser_histo.add_argument('--ticker', help='time range', required=False, default='*')
+        self.parser_histo.add_argument('--ticker', help='ticker', required=False, default='*')
         self.parser_histo.add_argument('--timerange', help='time range', required=False, default='1w')
-        self.parser_histo.add_argument('--timestart', help='time start', required=False, default='1 Jan 2021')
-        self.parser_histo.add_argument('--timeto', help='time to', required=False, default='1 Jan 2021')
-        self.parser_histo.add_argument('--backtest', action="store_true", default=True)
+        self.parser_histo.add_argument('--backtest', action="store_true", default=False)
+        self.parser_histo.add_argument('--timestart', help='time start', required=False)
+        self.parser_histo.add_argument('--timeto', help='time to', required=False)
         self.parser_histo.add_argument('--list', action="store_true", default=False)
+        self.parser_histo.add_argument('--last', nargs='?', type=int,  action="store", required=False)
+        self.parser_histo.add_argument('--print', nargs='?', type=int,  action="store", required=False)
         self.parser_histo.set_defaults(func=self.histos)
+
+        self.parser_zones = self.subparsers.add_parser('zones')
+        self.parser_zones.add_argument('--stake', help='stake', required=False, default='*')
+        self.parser_zones.add_argument('--ticker', help='ticker', required=False, default='*')
+        self.parser_zones.add_argument('--timerange', help='time range', required=False, default='1w')
+        self.parser_zones.add_argument('--update', help='update', action="store_true", default=False)
+        self.parser_zones.set_defaults(func=self.zones)
+
 
         self.parser_ps = self.subparsers.add_parser('ps')
         self.parser_ps.add_argument('ps', nargs='?', action="store", default='')
@@ -151,14 +163,14 @@ class FourKings():
         elif period == '5m':
             limit = 288
         for i in dt:
-            start_dt = datetime.strptime(i, "%Y%m%d")
+            start_dt = datetime.strptime(i, "%Y%m%1w")
             since = calendar.timegm(start_dt.utctimetuple()) * 1000
             if period == '1m':
                 ohlcv.extend(min_ohlcv(start_dt, pair, limit))
             else:
                 ohlcv.extend(binance.fetch_ohlcv(symbol=pair, timeframe=period, since=since, limit=limit))
         df = pd.DataFrame(ohlcv, columns=['Time', 'Open', 'High', 'Low', 'Close', 'Volume'])
-        df['Time'] = [datetime.fromtimestamp(float(time) / 1000) for time in df['Time']]
+        df['Time'] = [dtime.fromtimestamp(float(time) / 1000) for time in df['Time']]
         df['Open'] = df['Open'].astype(np.float64)
         df['High'] = df['High'].astype(np.float64)
         df['Low'] = df['Low'].astype(np.float64)
@@ -171,14 +183,31 @@ class FourKings():
     def get_klines(self, symbol, args):
         client =  Client()
         print('get_klines', symbol, args.timerange, args.timestart, 'START')
-        _klines = client.get_historical_klines(symbol, interval=args.timerange, start_str=args.timestart)
+        if args.timestart == None:
+            if self.tickers[symbol].get(args.timerange) != None:
+                print(self.tickers[symbol][args.timerange])
+                args.timestart = dtime.strptime(self.tickers[symbol][args.timerange], "%Y-%m-%d %H:%M:%S.%f").strftime("%Y-%m-%d")
+            else:
+                args.timestart = dtime(2021,1,1).strftime("%Y-%m-%d")
+        else:
+            tstart = args.timestart.split('-')
+            print(tstart)
+            args.timestart = dtime(int(tstart[0]), int(tstart[1]), int(tstart[2])).strftime("%Y-%m-%d")
+
+        if args.timeto == None:
+            args.timeto =  dtime.today().strftime("%Y-%m-%d")
+
+        print('date start : ', args.timestart, ' date to :', args.timeto)
+        _timestart = dtime.strptime(args.timestart, "%Y-%m-%d")
+        _klines = client.get_historical_klines(symbol, interval=args.timerange, start_str=_timestart.strftime("%d %b %Y"))
+
+
         print('get_klines', symbol, args.timerange, args.timestart, 'END')
         return symbol, _klines
 
 
     def displayStakes(self, stake, args):
         print(stake)
-
 
     def displayTicker(self, ticker, args):
         print(ticker)
@@ -193,8 +222,6 @@ class FourKings():
 
         relevant.sort()
         return relevant
-
-
 
     def tickers_update(self, pid, value, args):
         # track new symbol
@@ -239,29 +266,114 @@ class FourKings():
         for ticker in self.tickers.keys():
             if args.stake != '*':
                 if args.stake in ticker:
-                    if args.ticker != '*' and args.ticker in ticker:
+                    if args.ticker == '*' or args.ticker in ticker:
                         tickers.append(ticker)
             else:
-                if args.ticker != '*':
-                    if args.ticker in ticker:
+                if args.ticker == '*' or args.ticker in ticker:
                         tickers.append(ticker)
-                else:
-                    tickers.append(ticker)
         return tickers
+
+    def get_ticker_histo(self, ticker, timerange):
+        dataframe = pd.DataFrame([], columns=['otime', 'open', 'high', 'low', 'close', 'volume', 'ctime', 'quote',
+                                         'trades', 'TB Base Volume', 'TB Quote Volume', 'ignore'])
+        print('data/'+ timerange)
+        for filename in os.listdir('data/'+ timerange):
+            if ticker in filename:
+                try:
+                    df = pd.read_csv('data/'+ timerange+'/'+filename)
+                    dataframe = dataframe.append(df, ignore_index=True)
+                    dataframe.sort_values('otime', inplace=True)
+                    dataframe.drop_duplicates('otime', keep='last', inplace=True)
+                finally:
+                    print(ticker, filename)
+            else:
+                continue
+        return dataframe
+
+    def zone_update(self, sym, args):
+        #print('fibo update', sym, args.stake)
+        dataframe = self.get_ticker_histo(sym, args.timerange)
+        zone = 'neutre'
+        #print('updated', sym, zone)
+        return sym, zone
+
+    def zones_updates(self, args):
+        _zones={}
+        relevant = [symbol for symbol in self.get_local_tickers(args)]
+        callbacks = [lambda sym=symbol: self.zone_update(sym, args) for symbol in relevant]
+
+        with ThreadPoolExecutor() as executor:
+            tasks = [executor.submit(callback) for callback in callbacks]
+            for task in tasks:
+                symbol, zone = task.result()
+                _zones[symbol] = zone
+
+            for symbol in relevant:
+                if self.tickers[symbol].get('zones') == None:
+                    self.tickers[symbol]['zones'] = {}
+                self.tickers[symbol]['zones'][args.timerange] = _zones[symbol]
+                print('zone', symbol, _zones[symbol])
+            self.tickers.write()
+        return
+
+    def zones(self, args):
+        if args.update:
+            self.zones_updates(args)
+            return
+
+        if args.list:
+            return
 
     def histos(self, args):
         if args.timestart != None:
             args.timestart = args.timestart.replace('_', ' ')
-        if args.list == True:
-            print('list histo')
 
+        if args.print:
+            self.print_ticker_histo(args)
+            return
+
+        if args.last:
+            self.print_histos(args)
+            return
         else:
-
             self.get_histos(args)
+
+    def print_ticker_histo(self, args):
+        dataframe = self.get_ticker_histo(args.ticker, args.timerange)
+        if dataframe.size > 0:
+            for i in range(int(args.print), 0):
+                candle = dataframe.iloc[i]
+                print(dtime.fromtimestamp(int(candle.otime)/1000).strftime("%d/%m/%Y %H:%M"), dtime.fromtimestamp(int(candle.ctime)/1000).strftime("%d/%m/%Y %H:%M"), candle.open, candle.close, candle.high, candle.low)
+
+
+    def print_histos(self, args):
+        klines={}
+        relevant = [symbol for symbol in self.get_local_tickers(args)]
+        dt = [args.timestart, args.timeto]
+        callbacks = [lambda sym=symbol: self.get_klines(sym, args) for symbol in relevant]
+
+        with ThreadPoolExecutor() as executor:
+            tasks = [executor.submit(callback) for callback in callbacks]
+            for task in tasks:
+                symbol, lines = task.result()
+                klines[symbol] = lines
+
+            returns, symbols = [], []
+            for symbol in relevant:
+                dataframe = pd.DataFrame(klines[symbol])
+                if dataframe.size > 0:
+                    print(symbol, args.timerange, ' to csv')
+                    dataframe.columns = ['otime', 'open', 'high', 'low', 'close', 'volume', 'ctime', 'quote',
+                                         'trades', 'TB Base Volume', 'TB Quote Volume', 'ignore']
+                    for i in range(int(args.last), 0):
+                        candle = dataframe.iloc[i]
+                        print(dtime.fromtimestamp(int(candle.otime)/1000).strftime("%d/%m/%Y %H:%M"), dtime.fromtimestamp(int(candle.ctime)/1000).strftime("%d/%m/%Y %H:%M"), candle.open, candle.close, candle.high, candle.low)
+
 
     def get_histos(self, args):
         klines={}
         relevant = [symbol for symbol in self.get_local_tickers(args)]
+
         dt = [args.timestart, args.timeto]
         #callbacks = [lambda sym=symbol: self.get_klines(sym, args) for symbol in relevant]
         callbacks = [lambda sym=symbol: self.get_klines(sym, args) for symbol in relevant]
@@ -279,14 +391,19 @@ class FourKings():
                     print(symbol, args.timerange , ' to csv')
                     dataframe.columns = ['otime', 'open', 'high', 'low', 'close', 'volume', 'ctime', 'quote',
                                          'trades', 'TB Base Volume', 'TB Quote Volume', 'ignore']
+
                     if args.backtest:
-                        dataframe.to_csv('./backtest/' + symbol + '_' + args.timerange + '_' + args.timestart + '.csv',
+                        dataframe.to_csv('./backtest/' + args.timerange + '/' +symbol + '_' + args.timestart + '_' + args.timeto + '.csv',
                                          encoding='utf-8',
                                          index=False)
                     else:
-                        dataframe.to_csv('./data/' + symbol + '_' + args.timerange + '_' + args.timestart+ '.csv',
+                        dataframe.to_csv('./data/' + args.timerange + '/' + symbol + '_' + args.timestart  + '_' + args.timeto + '.csv',
                                          encoding='utf-8',
                                          index=False)
+                    candle = dataframe.iloc[-1]
+                    self.tickers[symbol][args.timerange] = dtime.fromtimestamp(int(candle.otime) / 1000).strftime("%Y-%m-%d %H:%M:%S.%f")
+
+            self.tickers.write()
 
     def tickers_load(self, args):
         tickers = self.get_tickers(args)
@@ -380,7 +497,7 @@ class FourKings():
     def action_exec_args(self, action, value, args):
 
         process_id = action + '-' + str(value) + '-'
-        process_id += datetime.now().strftime('%Y-%m-%d_%H:%M')
+        process_id += dtime.now().strftime('%Y-%m-%d_%H:%M')
         process_state = 'init'
         self.ps_add(process_id, process_state, action, value, args)
 

@@ -331,3 +331,504 @@
 
 # 2021-12-14 09:55:48.351225
 +bye
+
+# 2021-12-18 19:54:58.865876
++histo --stake USDT --ticker SUPER
+
+# 2021-12-18 19:58:52.133286
++exit
+
+# 2021-12-18 19:59:21.636339
++histo --stake USDT --ticker SUPER
+
+# 2021-12-18 21:30:21.569939
++histo --stake USDT --ticker SUPER --timestart 2021:01:01
+
+# 2021-12-18 21:32:50.147893
++histo --stake USDT --ticker SUPER
+
+# 2021-12-18 21:32:59.199596
++bye
+
+# 2021-12-18 21:33:18.899977
++histo --stake USDT --ticker SUPER
+
+# 2021-12-18 21:33:46.655027
++bye
+
+# 2021-12-18 21:35:49.556489
++histo --stake USDT --ticker SUPER
+
+# 2021-12-18 22:33:46.234651
++exit
+
+# 2021-12-18 22:33:54.895886
++histo --stake USDT --ticker SUPER
+
+# 2021-12-18 22:36:46.835935
++exit
+
+# 2021-12-18 22:36:56.214936
++histo --stake USDT --ticker SUPER
+
+# 2021-12-18 22:38:11.795734
++exit
+
+# 2021-12-18 22:38:23.240331
++histo --stake USDT --ticker SUPER
+
+# 2021-12-18 22:41:28.511526
++exit
+
+# 2021-12-18 22:41:36.565582
++histo --stake USDT --ticker SUPER
+
+# 2021-12-18 22:41:56.190389
++histo --stake USDT --ticker SUPER --timerange 1d
+
+# 2021-12-18 22:45:16.970479
++histo --stake USDT  --timerange 1d
+
+# 2021-12-18 22:45:32.073248
++histo --stake USDT --ticker * --timerange 1d
+
+# 2021-12-18 22:56:46.198476
++exit
+
+# 2021-12-18 22:57:07.529653
++histo --stake USDT --ticker * --timerange 1d
+
+# 2021-12-18 22:57:18.481009
++histo --stake USDT --ticker SUPER --timerange 1d
+
+# 2021-12-18 22:57:27.416850
++histo --stake USDT --ticker SUPER --timerange 1w
+
+# 2021-12-18 23:00:00.388559
++exxit
+
+# 2021-12-18 23:00:07.075167
++histo --stake USDT --ticker SUPER --timerange 1w
+
+# 2021-12-18 23:00:16.005536
++histo --stake USDT  --timerange 1w
+
+# 2021-12-19 12:17:31.085974
++T --timerange 1w
+
+# 2021-12-19 12:18:31.143540
++histo --stake USDT --timerange 1w
+
+# 2021-12-19 12:24:13.941885
++histo --stake USDT --ticker SUPER --timerange 1w
+
+# 2021-12-19 12:24:22.739642
++histo --stake USDT --ticker SUPER --timerange 1w --list
+
+# 2021-12-19 12:24:29.696002
++histo --stake USDT --ticker SUPER -- --list
+
+# 2021-12-19 12:24:41.098105
++histo --stake USDT --ticker SUPER  --list
+
+# 2021-12-19 12:52:02.043676
++exit
+
+# 2021-12-19 13:28:43.488771
++histo --stake USDT --ticker SUPER  --list
+
+# 2021-12-19 13:28:57.699931
++exit
+
+# 2021-12-19 13:30:03.674917
++histo --stake USDT --ticker SUPER  --list
+
+# 2021-12-19 15:47:25.060395
++exit
+
+# 2021-12-19 15:47:43.596351
++histo --stake USDT --ticker SUPER  --list
+
+# 2021-12-19 15:49:03.583176
++exit
+
+# 2021-12-19 15:49:10.513987
++histo --stake USDT --ticker SUPER  --list
+
+# 2021-12-19 15:49:44.441825
++exit
+
+# 2021-12-19 15:49:51.663328
++histo --stake USDT --ticker SUPER  --list
+
+# 2021-12-19 15:50:44.297130
++exit
+
+# 2021-12-19 15:50:58.117413
++histo --stake USDT --ticker SUPER  --list
+
+# 2021-12-19 16:45:56.942674
++exit
+
+# 2021-12-19 16:46:06.779254
++histo --stake USDT --ticker SUPER  --list
+
+# 2021-12-19 16:46:27.982763
++histo --stake USDT --ticker SUPER  --list --timerange 1d
+
+# 2021-12-19 17:10:18.353890
++exit
+
+# 2021-12-19 17:12:09.011180
++histo --stake USDT --ticker SUPER  --last --timerange 1d
+
+# 2021-12-19 17:12:40.622756
++histo --stake USDT --ticker SUPER  --last 
+
+# 2021-12-19 17:16:14.985671
++exit
+
+# 2021-12-19 17:16:28.255667
++histo --stake USDT --ticker SUPER  --last 
+
+# 2021-12-19 17:16:45.009458
++bye
+
+# 2021-12-19 17:18:52.810083
++histo --stake USDT --ticker SUPER --last -2
+
+# 2021-12-19 17:23:03.443294
++histo --stake USDT --ticker SUPER
+
+# 2021-12-19 17:24:55.782839
++histo --stake USDT --ticker SUPER 
+
+# 2021-12-19 17:32:01.759144
++>histo --stake USDT --ticker SUPER
+
+# 2021-12-19 17:32:27.068506
++histo --stake USDT --ticker SUPER
+
+# 2021-12-19 19:15:55.863677
++histo --stake USDT --tiker SUPER
+
+# 2021-12-19 19:16:36.025647
++histo --stake USDT --ticker SUPER
+
+# 2021-12-19 19:24:24.260301
++histo --ticker SUPER --stake USDT
+
+# 2021-12-19 19:26:50.780146
++histo --stake USDT --ticker SUPER
+
+# 2021-12-19 19:53:45.204628
++histo --stake USDT --ticker TICKER
+
+# 2021-12-19 19:54:07.668686
++histo --stake USDT --ticker SUPER
+
+# 2021-12-19 19:54:49.778760
++histo --stake USDT --ticker SUPER --timerange 1d
+
+# 2021-12-19 19:57:16.163498
++histo --stake USDT --ticker SUPER --timerange 1d --timeto 2021:12:18
+
+# 2021-12-19 19:58:46.448675
++histo --stake USDT --ticker SUPER --timerange 1d --timeto 2021:12:19
+
+# 2021-12-19 19:58:56.940497
++histo --stake USDT --ticker SUPER --timerange 1d --timestart 2021:12:19
+
+# 2021-12-19 19:59:16.411269
++histo --stake USDT --ticker SUPER --timerange 1d --timestart 2021/12/19
+
+# 2021-12-19 19:59:47.249733
++histo --stake USDT --ticker SUPER --timerange 1d --timestart 2021/12/19 00:00:00.0
+
+# 2021-12-19 20:00:14.049465
++histo --stake USDT --ticker SUPER --timerange 1d --timestart '2021/12/19 00:00:00.0'
+
+# 2021-12-19 20:00:43.722102
++histo --stake USDT --ticker SUPER --timerange 1d 
+
+# 2021-12-19 20:03:38.900337
++histo --stake USDT --ticker SUPER --timerange 1w
+
+# 2021-12-19 20:04:26.527485
++exit
+
+# 2021-12-19 20:04:39.003100
++histo --stake USDT --ticker SUPER --timerange 1w
+
+# 2021-12-19 20:05:11.597627
++histo --stake USDT --ticker SUPER --timerange 1w --timestart 2021:12:18
+
+# 2021-12-19 20:06:37.653788
++:12:18
+
+# 2021-12-19 20:07:24.436180
++histo --stake USDT --ticker SUPER --timestart 2021:12:18
+
+# 2021-12-19 20:43:18.535027
++histo --stake USDT --ticker SUPER --timestart 2021:01:01
+
+# 2021-12-19 20:44:09.714993
++histo --stake USDT --ticker SUPER --last -2
+
+# 2021-12-19 20:45:15.122579
++histo --stake USDT --ticker SUPER --last -2 --timestart 2021:01:01
+
+# 2021-12-19 20:46:45.522245
++histo --stake USDT --ticker SUPER --last -2 --timestart 2021:12:13
+
+# 2021-12-19 20:50:02.593816
++histo --stake USDT --ticker SUPER --last -1 --timestart 2021:01:01
+
+# 2021-12-19 20:50:45.951140
++histo --stake USDT --ticker SUPER --last -2 --timestart 2021:12:14
+
+# 2021-12-19 20:52:00.154311
++histo --stake USDT --ticker SUPER --last -2 --timestart 2021:12:06
+
+# 2021-12-19 21:44:37.758901
++histo --stake USDT --ticker SUPER
+
+# 2021-12-19 21:46:03.600105
++exit
+
+# 2021-12-19 21:46:13.285083
++histo --stake USDT --ticker SUPER
+
+# 2021-12-19 21:47:22.494915
++exit
+
+# 2021-12-19 21:47:29.278978
++histo --stake USDT --ticker SUPER
+
+# 2021-12-19 21:48:20.777898
++exit
+
+# 2021-12-19 21:48:29.533116
++histo --stake USDT --ticker SUPER
+
+# 2021-12-19 21:48:44.983294
++histo --stake USDT --ticker SUPER --last
+
+# 2021-12-19 21:48:54.661701
++histo --stake USDT --ticker SUPER --last -1
+
+# 2021-12-19 21:49:33.820291
++histo --stake USDT --ticker SUPER --last -2
+
+# 2021-12-19 21:50:25.559099
++histo --stake USDT --ticker SUPER --timerange 1d
+
+# 2021-12-19 21:51:08.326446
++histo --stake USDT --ticker SUPER --timerange 1d --last -1
+
+# 2021-12-19 22:24:59.273513
++histo --stake USDT --ticker SUPER --print -1
+
+# 2021-12-19 22:41:08.663393
++histo --stake USDT 
+
+# 2021-12-19 22:41:42.073229
++histo --stake USDT --timestart 2021:01:01
+
+# 2021-12-19 22:42:13.993524
++histo --stake USDT --ticker SUPER --timestart 2021:01:01
+
+# 2021-12-19 22:42:21.997167
++histo --stake USDT --ticker SUPER 
+
+# 2021-12-19 22:42:33.152477
++histo --stake USDT --ticker SUPER --print -1
+
+# 2021-12-20 09:23:35.526977
++histo --stake USDT --ticker SUPER --print -2
+
+# 2021-12-20 22:30:59.408682
++histo --stake USDT --ticker SUPER --print
+
+# 2021-12-20 22:31:31.380354
++histo --stake USDT --ticker SUPER --print -1
+
+# 2021-12-20 22:33:11.278808
++histo --stake USDT --ticker SUPER --print -2
+
+# 2021-12-20 22:42:33.029922
++histo --stake USDT --ticker SUPER --print -3
+
+# 2021-12-20 22:43:18.358420
++histo --stake USDT
+
+# 2021-12-21 08:42:24.184124
++histo --stake USDT --ticker SUPER --print -3
+
+# 2021-12-21 08:42:49.538288
++histo --stake USDT 
+
+# 2021-12-21 08:43:19.545710
++histo --stake USDT --timestart 2021:01:01
+
+# 2021-12-21 08:48:06.545166
++tickers --stake USDT --update
+
+# 2021-12-21 08:49:06.929167
++ticker --stake USDT --update
+
+# 2021-12-21 08:50:20.014103
++bye
+
+# 2021-12-21 08:50:48.526882
++ticker --stake USDT --update
+
+# 2021-12-21 08:55:37.435766
++ticker --stake USDT --updatee
+
+# 2021-12-21 08:56:01.691052
++ticker --stake USDT --update
+
+# 2021-12-21 08:56:33.744858
++histo --stake USDT --timestart 2021:01:01
+
+# 2021-12-21 08:59:50.779539
++exit
+
+# 2021-12-21 09:01:48.334196
++histo --stake USDT --timestart 2021:01:01
+
+# 2021-12-21 09:03:17.897401
++histo --stake USDT --ticker RVNUSDT --timestart 2021:01:01
+
+# 2021-12-21 09:03:26.763749
++exit
+
+# 2021-12-21 09:03:49.151529
++histo --stake USDT --ticker RVNUSDT --timestart 2021:01:01
+
+# 2021-12-21 09:07:32.757188
++bye
+
+# 2021-12-21 09:07:49.592095
++histo --stake USDT --ticker RVNUSDT --timestart 2021:01:01
+
+# 2021-12-21 09:09:56.559420
++bye
+
+# 2021-12-21 09:10:43.180006
++histo --stake USDT --ticker RVNUSDT
+
+# 2021-12-21 09:12:46.794406
++histo --stake USDT --ticker RVNUSDT 
+
+# 2021-12-21 09:14:30.377561
++histo --stake USDT  
+
+# 2021-12-21 09:15:36.564082
++bye
+
+# 2021-12-21 09:16:11.690048
++histo --stake USDT  --timestart 2021:01:01
+
+# 2021-12-21 09:17:04.383008
++histo --stake USDT  --ticker RARAUSDT --timestart 2021:01:01
+
+# 2021-12-21 09:17:13.919237
++histo --stake USDT  --ticker RAREUSDT --timestart 2021:01:01
+
+# 2021-12-21 09:17:18.656169
++exit
+
+# 2021-12-21 09:17:42.215178
++histo --stake USDT  --ticker RAREUSDT --timestart 2021:01:01
+
+# 2021-12-21 09:17:55.431649
++histo --stake USDT  --ticker SOLUSDT --timestart 2021:01:01
+
+# 2021-12-21 09:18:08.550687
++histo --stake USDT  --ticker * --timestart 2021:01:01
+
+# 2021-12-21 09:29:43.949637
++histo --stake USDT  --ticker A --timestart 2021:01:01
+
+# 2021-12-21 09:29:51.258738
++bye
+
+# 2021-12-21 09:31:33.851365
++histo --stake USDT  --ticker A --timestart 2021:01:01
+
+# 2021-12-21 09:35:42.161602
++bye
+
+# 2021-12-21 09:36:11.411323
++histo --stake USDT  --ticker AD --timestart 2021:01:01
+
+# 2021-12-21 20:14:20.369498
++histo --stake USDT A -ticker A 
+
+# 2021-12-21 20:14:42.495386
++histo --stake USDT --ticker A 
+
+# 2021-12-21 20:15:25.631622
++histo --stake USDT A
+
+# 2021-12-21 20:15:49.403406
++histo --stake USDT --ticker A
+
+# 2021-12-21 20:56:22.158058
++histo --stake USDT
+
+# 2021-12-21 21:00:49.652089
++histo --stake USDT --ticker A
+
+# 2021-12-21 21:36:04.488806
++histo --stake  USDT --ticker A
+
+# 2021-12-21 21:37:09.874890
++histo --stake USDT --ticker A
+
+# 2021-12-21 21:42:09.770714
++histo --stake USDT 
+
+# 2021-12-21 23:09:38.862025
++ --update
+
+# 2021-12-21 23:10:13.565501
++fibo --update
+
+# 2021-12-21 23:15:31.743028
++fibo --update *
+
+# 2021-12-21 23:15:50.471235
++fibo
+
+# 2021-12-21 23:16:00.252982
++fibo --update
+
+# 2021-12-21 23:19:10.988929
++fibo --stake USDT --update
+
+# 2021-12-22 09:02:46.338861
++fibo --update 
+
+# 2021-12-22 09:03:31.757521
++fibo --stake USDT --update
+
+# 2021-12-22 09:08:02.894865
++fibo --update USDT --update
+
+# 2021-12-22 09:08:32.662422
++fibo --stake USDT --update
+
+# 2021-12-22 09:10:06.255085
++fibo --stake USDT --updte
+
+# 2021-12-22 09:10:29.288649
++fibo --stake USDT --update
+
+# 2021-12-22 09:23:35.852422
++zones -update
+
+# 2021-12-22 09:23:55.224488
++zones --update
