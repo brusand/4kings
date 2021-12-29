@@ -16,7 +16,7 @@ from prompt_toolkit.history import FileHistory
 import ccxt
 import datetime
 import os
-
+import os.path
 import pandas as pd
 from time import sleep
 from binance import AsyncClient, Client, ThreadedWebsocketManager, ThreadedDepthCacheManager
@@ -24,6 +24,10 @@ from concurrent.futures import ThreadPoolExecutor
 
 from Telegram import Telegram;
 
+ECOCLASS_START = 5 #0.618
+ECOCLASS_END = 6 #0.786
+FIRSTCLASS_START = 6 #0.786
+FIRSTCLASS_END = 7 #0.886
 
 class FourKings():
     def __init__(self):
@@ -66,6 +70,7 @@ class FourKings():
         self.parser_zones.add_argument('--timerange', help='time range', required=False, default='1w')
         self.parser_zones.add_argument('--update', help='update', action="store_true", default=False)
         self.parser_zones.add_argument('--list', help='list', action="store_true", default=False)
+        self.parser_zones.add_argument('--print', help='print', action="store_true", default=False)
         self.parser_zones.set_defaults(func=self.zones)
 
 
@@ -278,7 +283,7 @@ class FourKings():
     def get_ticker_histo(self, ticker, timerange):
         dataframe = pd.DataFrame([], columns=['otime', 'open', 'high', 'low', 'close', 'volume', 'ctime', 'quote',
                                          'trades', 'TB Base Volume', 'TB Quote Volume', 'ignore'])
-        print('data/'+ timerange)
+        #print('data/'+ timerange)
         for filename in os.listdir('data/'+ timerange):
             if ticker in filename:
                 try:
@@ -287,23 +292,74 @@ class FourKings():
                     dataframe.sort_values('otime', inplace=True)
                     dataframe.drop_duplicates('otime', keep='last', inplace=True)
                 finally:
-                    print(ticker, filename)
+                   #print(ticker, filename)
+                    continue
             else:
                 continue
         return dataframe
 
+    def add_zone(self, sym, timerange, zone, close):
+        if self.tickers[sym].get('zones') == None:
+            self.tickers[sym]['zones'] = {}
+        self.tickers[sym]['zones'][timerange] = zone
+        self.tickers[sym]['zones'][timerange + '_close'] = close
+
+    def zones_print(self,  args):
+        for ticker in self.get_local_tickers(args):
+            if args.zones == '*' or self.tickers[ticker]['zones'][args.timerange] in args.zones and self.tickers[ticker]['zones'][args.timerange] != '':
+                dataframe = self.get_ticker_histo(ticker, args.timerange)
+                zone = ''
+                if len(dataframe) > 2:
+                    retracements = self.fibo_retracements(dataframe['low'].min(), dataframe['high'].max())
+                    last_closed_candle = dataframe.iloc[-2]
+
+                    if last_closed_candle.close <= retracements[ECOCLASS_START] and last_closed_candle.close >= retracements[ECOCLASS_END]:
+                        zone =  'ECOCLASS'
+
+                    if last_closed_candle.close <= retracements[FIRSTCLASS_START] and last_closed_candle.close >= retracements[
+                        FIRSTCLASS_END]:
+                        zone =  'FIRSTCLASS'
+
+                    if last_closed_candle.close < retracements[FIRSTCLASS_END]:
+                        zone = 'DYING'
+
+                    if last_closed_candle.close > retracements[ECOCLASS_START]:
+                        zone = 'MISSEDTRAIN'
+
+                    print(ticker, args.timerange, self.tickers[ticker]['zones'][args.timerange]) #, retracements)
+        return
+
     def zone_update(self, sym, args):
         #print('fibo update', sym, args.stake)
         dataframe = self.get_ticker_histo(sym, args.timerange)
-        zone = 'neutre'
-        #print('updated', sym, zone)
+        zone = ''
+        if len(dataframe) > 2:
+            retracements = self.fibo_retracements(dataframe['low'].min(), dataframe['high'].max())
+            last_closed_candle = dataframe.iloc[-2]
+
+            if last_closed_candle.close <= retracements[ECOCLASS_START] and last_closed_candle.close >= retracements[ECOCLASS_END]:
+                zone =  'ECOCLASS'
+
+            if last_closed_candle.close <= retracements[FIRSTCLASS_START] and last_closed_candle.close >= retracements[
+                FIRSTCLASS_END]:
+                zone =  'FIRSTCLASS'
+
+            if last_closed_candle.close < retracements[FIRSTCLASS_END]:
+                zone = 'DYING'
+
+            if last_closed_candle.close > retracements[ECOCLASS_START]:
+                zone = 'MISSEDTRAIN'
+
+            self.add_zone(sym, args.timerange, zone, last_closed_candle.close )
+            self.tickers.write()
+            print('updated', sym, self.tickers[sym]['zones'][args.timerange])
         return sym, zone
 
 
     def zones_list(self, args):
         for ticker in self.get_local_tickers(args):
-            if args.zones == '*' or self.tickers[ticker]['zones'][args.timerange] in args.zones:
-                print(ticker, self.tickers[ticker]['zones'][args.timerange])
+            if args.zones == '*' or self.tickers[ticker]['zones'][args.timerange] in args.zones and self.tickers[ticker]['zones'][args.timerange] != '':
+                print(ticker, self.tickers[ticker]['zones'][args.timerange], self.tickers[ticker]['zones'][args.timerange + '_close'])
 
     def zones_updates(self, args):
         _zones={}
@@ -324,9 +380,29 @@ class FourKings():
             self.tickers.write()
         return
 
+    def fibo_retracements(self, min, max):
+        diff = max - 0
+        retracements = []
+        retracements.append(max  - 0 * diff )
+        retracements.append(max  - 0.114 * diff)
+        retracements.append(max  - 0.214 * diff)
+        retracements.append(max  - 0.382 * diff)
+        retracements.append(max  - 0.5 * diff)
+        retracements.append(max  - 0.618 * diff)
+        retracements.append(max  - 0.786 * diff)
+        retracements.append(max  - 0.886 * diff)
+        retracements.append(max  - 1 * diff)
+        return retracements
+
+
+
     def zones(self, args):
         if args.update:
             self.zones_updates(args)
+            return
+
+        if args.print:
+            self.zones_print(args)
             return
 
         if args.list:
@@ -402,11 +478,29 @@ class FourKings():
                                          'trades', 'TB Base Volume', 'TB Quote Volume', 'ignore']
 
                     if args.backtest:
-                        dataframe.to_csv('./backtest/' + args.timerange + '/' +symbol + '_' + args.timestart + '_' + args.timeto + '.csv',
+                        dataframe.to_csv('./backtest/' + args.timerange + '/' +symbol + '.csv',
                                          encoding='utf-8',
                                          index=False)
                     else:
-                        dataframe.to_csv('./data/' + args.timerange + '/' + symbol + '_' + args.timestart  + '_' + args.timeto + '.csv',
+                        if os.path.isfile('data/' + args.timerange + '/' + symbol +'.csv'):
+                            df = pd.read_csv('data/' + args.timerange + '/' + symbol+'.csv')
+                            dataframe = dataframe.append(df, ignore_index=True)
+                            dataframe.sort_values('otime', inplace=True)
+                            dataframe.drop_duplicates('otime', keep='last', inplace=True)
+                        else:
+                            for filename in os.listdir('data/' + args.timerange):
+                                if symbol in filename:
+                                    try:
+                                        df = pd.read_csv('data/' + args.timerange + '/' + filename)
+                                        dataframe = dataframe.append(df, ignore_index=True)
+                                        dataframe.sort_values('otime', inplace=True)
+                                        dataframe.drop_duplicates('otime', keep='last', inplace=True)
+                                    finally:
+                                        print(symbol, filename)
+                                else:
+                                    continue
+
+                        dataframe.to_csv('./data/' + args.timerange + '/' + symbol + '.csv',
                                          encoding='utf-8',
                                          index=False)
                     candle = dataframe.iloc[-1]
