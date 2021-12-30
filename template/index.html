@@ -10,10 +10,10 @@
 <body>
     <h1>Technical Scanner</h1>
     <form>
-        <select name="pattern">
-            <option value="">-- Select a Pattern --</option>
-            {% for key in candlestick_patterns %}
-                <option value="{{ key }}" {% if pattern == key %}selected="selected"{% endif %}>{{ candlestick_patterns[key] }}</option>
+        <select name="zones">
+            <option value="">-- Select a Zone --</option>
+            {% for key in zones %}
+                <option value="{{ key }}" {% if zone == key %}selected="selected"{% endif %}>{{ zones[key] }}</option>
             {% endfor %}
         </select>
 
@@ -26,11 +26,11 @@
             <th>company</th>
             <th>signal</th>
         </tr>
-        {% for stock in stocks %}
-            {% if stocks[stock][pattern] %}
+        {% for ticker in tickers %}
+            {% if tickers[ticker]['1w'] %}
             <tr>
                 <td>
-                    {{ stock }}
+                    {{ ticker }}
                 </td>
                 <td>
                     {{ stocks[stock]['company'] }}

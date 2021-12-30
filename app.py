@@ -2,7 +2,6 @@ import os, csv
 import talib
 import pandas
 from flask import Flask, escape, request, render_template
-from patterns import candlestick_patterns
 from configobj import ConfigObj
 
 app = Flask(__name__)
@@ -38,4 +37,4 @@ def index():
             except Exception as e:
                 print('failed on filename: ', filename)
 
-    return render_template('index.html', candlestick_patterns=candlestick_patterns, tickers=tickers.keys(), pattern=pattern)
+    return render_template('index.html',  tickers=tickers.keys(), timeframes=['1d','1w'], zones=['MISSEDTRAIN','FISRCLASS', 'ECOCLASS', 'DYING'])

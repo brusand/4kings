@@ -68,33 +68,34 @@ class Telegram:
         registers all known command handlers
         and starts polling for message updates
         """
-        self._updater = Updater(token=config['users'][config['user']]['telegram']['token'], workers=0,
-                                use_context=True)
+        if self.enabled:
+            self._updater = Updater(token=config['users'][config['user']]['telegram']['token'], workers=0,
+                                    use_context=True)
 
-        # Register command handler and start telegram message polling
-        handles = [
-            CommandHandler('status', self._status),
-            CommandHandler('balance', self._balance),
-            CommandHandler('start', self._start),
-            CommandHandler('stop', self._stop),
-            CommandHandler('help', self._help),
-            CommandHandler('version', self._version),
-        ]
-        callbacks = [
-            CallbackQueryHandler(self._balance, pattern='update_balance'),
-        ]
-        for handle in handles:
-            self._updater.dispatcher.add_handler(handle)
+            # Register command handler and start telegram message polling
+            handles = [
+                CommandHandler('status', self._status),
+                CommandHandler('balance', self._balance),
+                CommandHandler('start', self._start),
+                CommandHandler('stop', self._stop),
+                CommandHandler('help', self._help),
+                CommandHandler('version', self._version),
+            ]
+            callbacks = [
+                CallbackQueryHandler(self._balance, pattern='update_balance'),
+            ]
+            for handle in handles:
+                self._updater.dispatcher.add_handler(handle)
 
-        for callback in callbacks:
-            self._updater.dispatcher.add_handler(callback)
+            for callback in callbacks:
+                self._updater.dispatcher.add_handler(callback)
 
-        self._updater.start_polling(
-            bootstrap_retries=-1,
-            timeout=30,
-            read_latency=60,
-            drop_pending_updates=True,
-        )
+            self._updater.start_polling(
+                bootstrap_retries=-1,
+                timeout=30,
+                read_latency=60,
+                drop_pending_updates=True,
+            )
 
     def _init_keyboard(self) -> None:
         """
@@ -243,6 +244,9 @@ class Telegram:
         :param parse_mode: telegram parse mode
         :return: None
         """
+        if self.enabled == None or self.enabled == False:
+            return
+
         reply_markup: Union[InlineKeyboardMarkup, ReplyKeyboardMarkup]
         if query:
             self._update_msg(query=query, msg=msg, parse_mode=parse_mode,

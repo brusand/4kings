@@ -206,7 +206,8 @@ class FourKings():
 
         print('date start : ', args.timestart, ' date to :', args.timeto)
         _timestart = dtime.strptime(args.timestart, "%Y-%m-%d")
-        _klines = client.get_historical_klines(symbol, interval=args.timerange, start_str=_timestart.strftime("%d %b %Y"))
+        _timeto = dtime.strptime(args.timeto, "%Y-%m-%d")
+        _klines = client.get_historical_klines(symbol, interval=args.timerange, start_str=_timestart.strftime("%d %b %Y"),  end_str=_timeto.strftime("%d %b %Y") )
 
 
         print('get_klines', symbol, args.timerange, args.timestart, 'END')
@@ -411,7 +412,9 @@ class FourKings():
 
     def histos(self, args):
         if args.timestart != None:
-            args.timestart = args.timestart.replace('_', ' ')
+            args.timestart = args.timestart.replace('_', '-')
+        if args.timeto != None:
+            args.timeto = args.timeto.replace('_','-')
 
         if args.print:
             self.print_ticker_histo(args)

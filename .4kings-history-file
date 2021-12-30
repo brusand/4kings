@@ -862,3 +862,246 @@
 
 # 2021-12-22 10:11:27.995869
 +zones --list eco_neutre
+
+# 2021-12-23 22:30:24.944595
++histo --stake USDT
+
+# 2021-12-26 15:05:08.861087
++zone --update
+
+# 2021-12-26 15:06:02.249508
++zones --update
+
+# 2021-12-26 23:04:22.574539
++tikckers --update
+
+# 2021-12-26 23:04:40.240504
++tickers --update
+
+# 2021-12-26 23:05:49.087112
++ticker --update --stake USDT
+
+# 2021-12-26 23:07:36.537085
++histo --update --timestart 2021:01:01 --stake USDT
+
+# 2021-12-26 23:08:46.074441
++histo --stake USDT
+
+# 2021-12-26 23:10:14.645928
++histo --ticker CELO --print
+
+# 2021-12-26 23:11:06.358709
++ticker --update --stake USDT
+
+# 2021-12-26 23:14:06.016267
++ticker --stake USDT --load
+
+# 2021-12-26 23:14:21.391773
++histo --stake USDT
+
+# 2021-12-26 23:15:14.074173
++zones --update
+
+# 2021-12-28 22:13:08.726917
++histos --stake USDT
+
+# 2021-12-28 22:13:39.070953
++histo --stake USDT
+
+# 2021-12-28 22:14:53.720676
++zones --update
+
+# 2021-12-28 22:17:06.197444
++zones --list FIRSTCLASS
+
+# 2021-12-28 22:20:05.428887
++zones --list ECO
+
+# 2021-12-28 22:20:21.586220
++zone --lisst
+
+# 2021-12-28 22:20:32.613282
++zones --list ECO
+
+# 2021-12-28 22:20:51.823685
++zones --list ECOCLASS
+
+# 2021-12-28 22:26:20.484717
++zones --update 
+
+# 2021-12-28 22:26:40.276455
++zones --list FIRSTCLASS
+
+# 2021-12-28 22:38:03.786605
++zones --update
+
+# 2021-12-28 22:39:40.631112
++zones --list FIRSTCLASS
+
+# 2021-12-28 22:43:27.893113
++ticker --print 2 ZILUSDT
+
+# 2021-12-28 22:44:36.915817
++histo --ticker ZIL --print -2
+
+# 2021-12-28 22:53:37.800797
++zones --print ZILUSDT
+
+# 2021-12-28 22:55:30.790551
++zones --print
+
+# 2021-12-28 23:00:51.780563
++zones --update
+
+# 2021-12-28 23:01:12.049261
++zones --list FIRSTCLASS
+
+# 2021-12-28 23:03:52.066406
++zones --print
+
+# 2021-12-29 12:40:36.009119
++zones --update
+
+# 2021-12-29 12:41:00.698422
++zones --print FIRST
+
+# 2021-12-29 12:41:11.834587
++zones --rpint FIRSTCLASS
+
+# 2021-12-29 12:41:30.320051
++zones --print FIRSTCLASS
+
+# 2021-12-29 12:51:56.055335
++zones --print YING
+
+# 2021-12-29 12:52:06.202784
++zones --print DYING
+
+# 2021-12-29 13:33:29.780715
++histos --print -2 ZRXUSDT
+
+# 2021-12-29 13:33:47.451637
++histo --print -2 ZRXUSDT
+
+# 2021-12-29 13:34:09.717344
++histos --print -2 --ticker ZRX
+
+# 2021-12-29 13:34:55.136913
++histo --rint -2 --ticker ZRX
+
+# 2021-12-29 13:35:21.130901
++histo --print -2 --ticker ZRX
+
+# 2021-12-29 13:37:26.981507
++histo --print -10 --ticker ZRX
+
+# 2021-12-29 13:38:19.216581
++histo --update
+
+# 2021-12-29 13:39:14.236778
++histo --ticker ZRX --timestart 2021:01:01
+
+# 2021-12-29 13:40:37.207092
++histo --ticker ZRX --timestart 01:01:2021
+
+# 2021-12-29 13:41:31.734057
++histo --ticker ZRX 
+
+# 2021-12-29 13:42:04.375378
++histo --print -2 --ticker ZRX
+
+# 2021-12-29 13:43:23.158491
++ticker --update
+
+# 2021-12-29 13:44:14.503648
++ticker --load --stake USDT
+
+# 2021-12-29 13:44:32.247400
++--stake USDT
+
+# 2021-12-29 13:44:48.713467
++histo --stake USDT
+
+# 2021-12-29 13:45:28.056476
++update
+
+# 2021-12-29 13:46:22.065617
++zones --update
+
+# 2021-12-29 13:46:53.085883
++zones --print DYING
+
+# 2021-12-29 13:48:29.112138
++zones --print FIRSTCLASS
+
+# 2021-12-30 20:25:34.009322
++histo --timerange 1d --ticker TLMUSDT --timestart 01:01:2021 --timestop 01:12:2021
+
+# 2021-12-30 20:25:55.404042
++histo --timerange 1d --ticker TLMUSDT --timestart 01:01:2021 --timestop 01:12:2021 --load
+
+# 2021-12-30 20:26:23.572759
++histo --timerange 1d --ticker TLMUSDT --timestart 01:01:2021 --timeto 01:12:2021
+
+# 2021-12-30 20:31:35.671857
++histo --timerange 1d --ticker TLMUSDT --timestart 2021-01-01 --timeto 2021-12-01
+
+# 2021-12-30 20:32:01.704667
++histo --print -5 --ticker TLM
+
+# 2021-12-30 20:32:43.461759
++histo --print -5 --ticker TLM --timerange 1d
+
+# 2021-12-30 20:36:02.022586
++histo --timerange 1d --ticker TLMUSDT --timestart 2021-01-01 --timeto 2021-12-01
+
+# 2021-12-30 20:42:34.897587
++histo --load --timerange 1d --ticker TLM --timestart 2021-01-01 timeto 2021-12-01
+
+# 2021-12-30 20:42:58.295398
++histo --load --timerange 1d --ticker TLM --timestart 2021-01-01 --timeto 2021-12-01
+
+# 2021-12-30 20:46:38.829515
++histo --load --timerange 1d --ticker TLM --timestart 2021_01_01 timeto 2021_12_01
+
+# 2021-12-30 20:46:53.601468
++histo --load --timerange 1d --ticker TLM --timestart 2021_01_01 --timeto 2021_12_01
+
+# 2021-12-30 20:48:01.229051
++histo  --timerange 1d --ticker TLM --timestart 2021_01_01 timeto 2021_12_01
+
+# 2021-12-30 20:48:49.435746
++histo --load --timerange 1d --ticker TLM --timestart 2021-01-01 --timeto 2021-12-01
+
+# 2021-12-30 20:49:28.725046
++histo  --timerange 1d --ticker TLM --timestart 2021-01-01 --timeto 2021-12-01
+
+# 2021-12-30 20:50:56.802947
++histo --print -5 --timerange 1d --ticker TLM
+
+# 2021-12-30 20:52:40.669040
++histo  --timerange 1d --ticker TLM --timestart 2021-12-01 --timeto 2021-12-02
+
+# 2021-12-30 20:53:04.312615
++histo --print -5 --ticker TLM
+
+# 2021-12-30 20:53:39.390673
++hiisto --print -5 --ticker TLM --timerange 1d
+
+# 2021-12-30 20:54:19.495545
++histo --print -5 --timerange 1d --tcker TLM
+
+# 2021-12-30 20:55:07.858939
++histo --print -5 --ticker TLM --timerange 1d
+
+# 2021-12-30 20:56:14.956806
++histo --timerange 1d --ticker TLM --timestart 2021-12-03 --timeto 2021-12-4
+
+# 2021-12-30 20:56:42.507666
++histo --print -6 --timerange 1d --ticker TLM
+
+# 2021-12-30 21:00:44.468673
++histo --timerange 1d --ticker TLM --timestart 2021-12-01 --timeto 2021-12-05
+
+# 2021-12-30 21:01:06.118599
++histo --print -10 --ticker TLM --timerange 1d
