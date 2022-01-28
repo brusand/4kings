@@ -1105,3 +1105,1302 @@
 
 # 2021-12-30 21:01:06.118599
 +histo --print -10 --ticker TLM --timerange 1d
+
+# 2021-12-30 21:19:41.123534
++plot --timerange 1d --ticker TLM
+
+# 2021-12-30 21:21:53.338279
++plot --ticker TLM
+
+# 2021-12-30 21:38:05.577618
++plot --ticker TLM --timerange 1d
+
+# 2021-12-30 22:16:58.445222
++plot --ticker --fibo
+
+# 2021-12-30 22:19:07.533976
++plot --ticker TLM --fibo
+
+# 2021-12-30 22:28:46.041857
++>plot --ticker TLM --fibo
+
+# 2021-12-30 22:49:31.469300
++plot --ticker TLM --fibo
+
+# 2021-12-30 23:08:00.709879
++plot --ticker TLM --timerage 1d --fibo
+
+# 2021-12-30 23:08:33.898884
++plot --ticker TLM --timerane 1d --fibo
+
+# 2021-12-30 23:09:01.114037
++plot --ticker TLM --timerange 1d --fibo
+
+# 2021-12-30 23:16:34.769084
++histo --timerange 1m --ticker TLM --timestart 2021-12-29
+
+# 2021-12-30 23:17:39.476380
++histo --timerange m --ticker TLM --timestart 2021-12-29 --timeto 2021-12-30
+
+# 2021-12-30 23:19:01.054858
++histo --timerange 1m --ticker TLM --timestart 2021-12-29
+
+# 2021-12-30 23:19:22.484069
++plot --ticker TLM --timerange 1m --fibo
+
+# 2021-12-30 23:20:48.354316
++plot --ticker TLM --timerange 1m
+
+# 2021-12-31 12:36:54.536917
++plot --ticker TLM --timerange 1d
+
+# 2021-12-31 14:57:27.208839
++plot --ticker TLM 
+
+# 2021-12-31 15:10:16.551695
++plot --ticker TLM
+
+# 2021-12-31 16:22:35.112005
++plot --ticker TLM --timerange 1d
+
+# 2021-12-31 16:24:32.555324
++plot --ticker TLM --timerange 1m
+
+# 2022-01-01 18:28:22.252899
++histo --ticker TLM --timerange 5m --timestart 2022_01_01
+
+# 2022-01-01 18:51:10.225012
++ticker --update --stake USDT
+
+# 2022-01-01 18:51:26.172847
++ps --list
+
+# 2022-01-01 18:51:42.571596
++ps --stop tickers_update--2022-01-01_18:51
+
+# 2022-01-01 18:51:58.940626
++ps --list
+
+# 2022-01-01 19:08:07.578488
++bye
+
+# 2022-01-01 22:17:29.354132
++histo --load --timerange 1d
+
+# 2022-01-01 22:18:15.780315
++histo --timerange 1d
+
+# 2022-01-01 22:19:15.762648
++histo --print -3 --timerange 1d --ticker TLM
+
+# 2022-01-03 08:28:34.294818
++histo --stake USDT --timerange 1d
+
+# 2022-01-03 08:29:30.944320
++zone --update --timerange 1d
+
+# 2022-01-03 08:41:58.157792
++zones --update --timerange 1d
+
+# 2022-01-03 11:13:16.227995
++zonzs --update --timerange 1d
+
+# 2022-01-03 11:13:45.356075
++zones --update --timerange 1d
+
+# 2022-01-03 12:41:53.434936
++histo --update
+
+# 2022-01-03 12:42:14.219403
++histo --stake USDT
+
+# 2022-01-03 12:43:37.913285
++zones --update
+
+# 2022-01-03 12:44:39.467634
++zones --update --timerange 1w
+
+# 2022-01-03 12:49:00.685538
++zones --list --timerange 1w 
+
+# 2022-01-03 12:52:04.581348
++zonrs --list 
+
+# 2022-01-03 12:52:20.145457
++zones --list
+
+# 2022-01-03 12:55:39.657686
++zones --list --trend *
+
+# 2022-01-03 12:58:40.326823
++zones --list
+
+# 2022-01-03 12:58:52.493514
++zones --list --trend *
+
+# 2022-01-03 12:59:11.215923
++zones --list --trend FIRSTCLASS
+
+# 2022-01-04 10:54:26.349224
++plot --ticker TLM --wb
+
+# 2022-01-04 10:57:24.690412
++plot --ticker TLM --timerange 1d ---wb
+
+# 2022-01-04 10:57:53.919329
++plot --ticker TLM --timerange 1d --wb
+
+# 2022-01-04 11:08:53.334976
++plot --ticker TLM --timerange 1m --wb
+
+# 2022-01-04 11:10:29.891302
++plot --ticker TLM --timerange 1d --wb
+
+# 2022-01-04 11:15:00.037919
++plot --ticker TLM --timerange 1m --wb
+
+# 2022-01-04 11:27:02.537229
++plot --ticker TLM --timerange 1d --wb_detect
+
+# 2022-01-04 11:31:48.581989
++plot --ticker TLM --timerange 1m --wb_detect
+
+# 2022-01-04 11:37:11.632521
++                plt.plot(x[l_min], data[l_min], "o", label="min", color='r')  # minima
+
+# 2022-01-04 11:37:43.506691
++plot --ticker TLM --timerange 1m --wb_detect
+
+# 2022-01-04 14:19:35.680234
++plot --ticker TLM --timerange 1m
+
+# 2022-01-04 19:02:47.600866
++plot --ticker TLM --timerange 4h --wb_detect
+
+# 2022-01-04 19:03:17.859926
++plot --ticker TLM --wb_detect
+
+# 2022-01-04 19:04:08.712378
++plot --ticker TLM --timerange 1h --wb_detect
+
+# 2022-01-04 19:04:38.354518
++plot --ticker TLM --timerange 1d --wb_detect
+
+# 2022-01-04 19:05:09.275164
++plot --ticker TLM --timerange 1m
+
+# 2022-01-04 19:05:50.225339
++plot --ticker TLM --timerange 1m --wb
+
+# 2022-01-04 19:11:03.793944
++plot --ticker TLM --timerange 1m --wb_detect
+
+# 2022-01-04 19:13:16.990771
++plot --ticker TLM --timerange 1m --wb
+
+# 2022-01-04 19:19:32.411038
++plot --ticker TLM --timerange 1m --wb_detect
+
+# 2022-01-04 19:39:54.695021
++plot --ticker TLM --timerange 1m --wb_fig
+
+# 2022-01-04 22:57:33.886793
++plot --ticker TLM --timerange 1m --wb
+
+# 2022-01-05 10:26:54.591577
++plot --tiicker TLM --tmerange 1m --wb
+
+# 2022-01-05 10:27:20.057318
++plot --tiicker TLM --timerange 1m --wb
+
+# 2022-01-05 10:28:23.478381
++plot --ticker TLM --tmerange 1m --wb
+
+# 2022-01-05 10:28:48.574951
++plot --ticker TLM --timerange 1m --wb
+
+# 2022-01-05 10:33:52.407009
++plot --ticker TLM --timerange 1m --fibo
+
+# 2022-01-05 10:37:18.206079
++                plt.ylabel("Price")
+
+# 2022-01-05 10:37:39.097854
++plot --ticker TLM --timerange 1m --wb
+
+# 2022-01-05 10:41:13.221938
++                plt.ylabel("Price")
+
+# 2022-01-05 10:41:38.235395
++plot --ticker TLM --timerange 1m --wb
+
+# 2022-01-05 10:44:23.093595
++                fig, ax = plt.subplots()
+
+# 2022-01-05 10:44:45.351228
++plot --ticker TLM --timerange 1m --wb
+
+# 2022-01-05 12:24:44.438358
++                plt.ylabel("Price")
+
+# 2022-01-05 12:25:05.553899
++plot --ticker TLM --timerange 1m --wb
+
+# 2022-01-05 12:26:17.139223
++wb
+
+# 2022-01-05 12:26:37.172239
++plot --ticker TLM --timerange 1m --wb
+
+# 2022-01-05 15:15:34.252141
++plot --ticker TLM --timerange --wb
+
+# 2022-01-05 15:16:00.231878
++plot --ticker TLM --timerange 1m --wb
+
+# 2022-01-10 19:24:30.020649
++histo --stake BUSD --timerange 1m --ticker ICP  --timestart 01-01-2022
+
+# 2022-01-10 19:24:48.774987
++histos --stake BUSD --timerange 1m --ticker ICP  --timestart 01-01-2022
+
+# 2022-01-10 19:25:09.263346
++histos  --stake BUSD --timerange 1m --ticker ICP  --timestart 01-01-2022
+
+# 2022-01-10 19:25:24.702977
++histo --stake BUSD --timerange 1m --ticker ICP  --timestart 01-01-2022
+
+# 2022-01-10 19:28:03.072916
++ticker --stake BUSD
+
+# 2022-01-10 19:28:40.757474
++ticker --stake BUSD --load
+
+# 2022-01-10 19:28:53.111983
++histo --stake BUSD --timerange 1m --ticker ICP  --timestart 01-01-2022
+
+# 2022-01-10 19:29:14.863084
++histo --stake BUSD --timerange 1m --ticker ICP  --timestart 2022-01-01
+
+# 2022-01-10 19:30:51.497505
++plot --ticker ICP --fibo
+
+# 2022-01-10 19:31:27.236020
++plot --ticker ICP --wb
+
+# 2022-01-10 19:32:17.236093
++plot --ticker ICP --wb_detect
+
+# 2022-01-10 19:40:02.707797
++histo --ticker FLUX --stake BUSD --timerange 1m --timestart 2022-01-01
+
+# 2022-01-10 19:40:42.770730
++plot --stake BUSD --ticker FLUX --wb_detect
+
+# 2022-01-10 19:41:30.978913
++plot --stake BUSD --ticker FLUX --wb_fig
+
+# 2022-01-10 19:41:51.380769
++plot --stake BUSD --ticker FLUX --wb_detect
+
+# 2022-01-10 19:42:46.018373
++plot --ticker FLUX --wb_detect
+
+# 2022-01-10 20:02:38.572925
++plot ICP-BUSD --fibo
+
+# 2022-01-10 20:03:45.560001
++plot FLUX-BUSD --fibo
+
+# 2022-01-10 20:04:05.358024
++plot FLUX-BUSD --fibo --timegrange 1m
+
+# 2022-01-10 20:04:49.537272
++plot FLUX-BUSD --timerange 1m --fibo
+
+# 2022-01-10 20:05:03.373183
++plot FLUX-BUSD --timerange 1m 
+
+# 2022-01-10 20:06:03.204988
++plot FLUX-BUSD --timerange 1m --wb_detect
+
+# 2022-01-11 10:24:10.100214
++histo TLM-BUSD --print -5
+
+# 2022-01-11 13:40:17.951971
++exchange --balance
+
+# 2022-01-11 13:40:41.721957
++exchang binance --balance
+
+# 2022-01-11 13:41:07.004983
++exchange binance --balance
+
+# 2022-01-11 13:42:52.681277
++exchanges binance --balance
+
+# 2022-01-11 13:43:22.993799
++exchange binance --balance
+
+# 2022-01-11 15:43:10.774773
++exchange --balance
+
+# 2022-01-11 15:46:27.715312
++exchange --balance 
+
+# 2022-01-11 15:46:49.958023
++exchange --balance
+
+# 2022-01-11 15:47:05.500527
++exchange binance --balance
+
+# 2022-01-11 16:11:13.342822
++exchange --balance
+
+# 2022-01-11 16:13:08.823024
++ticker --list
+
+# 2022-01-11 16:15:25.132294
++exchange --balance
+
+# 2022-01-11 16:15:47.491622
++exchange
+
+# 2022-01-11 16:17:27.829551
++exchange --balance
+
+# 2022-01-11 17:06:24.404833
++zone --list
+
+# 2022-01-11 17:06:38.285412
++zones --list
+
+# 2022-01-11 17:06:44.414100
++zone --list
+
+# 2022-01-11 17:07:06.743468
++exchange --balance
+
+# 2022-01-11 17:07:38.613609
++exchange --balanceinance 
+
+# 2022-01-11 17:08:00.295511
++exchange binance --balance
+
+# 2022-01-11 17:14:05.816116
++exchange --balance --stake BNB --asset ROSE
+
+# 2022-01-11 17:26:12.781686
++exchange --balance
+
+# 2022-01-11 17:28:16.434966
++exchance --balance
+
+# 2022-01-11 17:30:10.280507
++exchange --balance
+
+# 2022-01-11 17:36:10.251423
++exit
+
+# 2022-01-11 17:38:12.744010
++exchange --balance
+
+# 2022-01-11 17:41:02.477704
++python-twisted
+
+# 2022-01-11 17:44:46.903264
++exchange --balance
+
+# 2022-01-11 17:53:08.880616
++exchange --chalenge
+
+# 2022-01-11 17:53:28.741199
++exchange --balance
+
+# 2022-01-11 17:54:37.614220
++exchange --blance
+
+# 2022-01-11 17:54:51.667537
++exchange --balance
+
+# 2022-01-11 18:11:29.632416
++exit
+
+# 2022-01-11 18:12:34.292914
++exchange --balance
+
+# 2022-01-11 19:40:05.361958
++exit
+
+# 2022-01-11 19:47:55.174280
++exchange --balance
+
+# 2022-01-11 19:59:37.570216
++exchage --balance
+
+# 2022-01-11 20:00:00.018939
++exchange --balance
+
+# 2022-01-11 20:13:37.656594
++exchange --stake BNB --blalance
+
+# 2022-01-11 20:14:03.004939
++exchange --stake BNB --balance
+
+# 2022-01-11 20:16:19.739363
++exchange --balance
+
+# 2022-01-12 17:51:02.563710
++trade ROSE/BNB --timerange 1m -timestart 2022-01-12
+
+# 2022-01-12 17:54:59.299788
++ trade ROSE/BNB --timerange 1m -timestart 2022-01-12
+
+# 2022-01-12 17:55:19.480522
++ trade ROSE/BNB --timerange 1m --timestart 2022-01-12
+
+# 2022-01-12 17:56:34.559470
++ trade ROSE/BNB --timerange 1m -timestart 2022-01-12
+
+# 2022-01-12 17:56:48.164593
++ trade ROSE/BNB --timerange 1m --timestart 2022-01-12
+
+# 2022-01-12 17:59:01.558265
++ trade ROSEBNB --timerange 1m -timestart 2022-01-12
+
+# 2022-01-12 17:59:18.917473
++ trade ROSEBNB --timerange 1m --timestart 2022-01-12
+
+# 2022-01-13 20:25:41.513317
++histo ROSE/BNB --timerange 1m
+
+# 2022-01-13 20:29:56.103649
++histo ROSE/BNB --timerange 1m --timestart 2022-01-13
+
+# 2022-01-13 20:37:02.470627
++plot ROSEBNB
+
+# 2022-01-13 20:37:33.349257
++plot ROSE/BNB
+
+# 2022-01-13 20:37:56.817449
++plot ROSE/BNB --plot
+
+# 2022-01-13 20:38:22.893321
++plot ROSE/BNB
+
+# 2022-01-13 20:45:20.372764
++plot ROSE/BNB 
+
+# 2022-01-13 20:46:08.357613
++plot ROSE/BNB --timerange 1m
+
+# 2022-01-13 20:46:49.752004
++histo ROSE/BNB --timerange 1m --timestart 2022-01-01
+
+# 2022-01-13 20:47:24.412448
++plot ROSE/BNB
+
+# 2022-01-13 20:47:51.554584
++plot ROSE/BNB --timerange 1m
+
+# 2022-01-13 20:49:11.899639
++plot ROSE/BNB --timerange 1m --fib
+
+# 2022-01-13 20:49:56.113072
++plot ROSE/BNB --fibo
+
+# 2022-01-13 20:53:20.873756
++plot ROSE/BNB --wb
+
+# 2022-01-13 20:56:09.800324
++plot ROSE/BNB --fibo
+
+# 2022-01-13 20:56:27.853898
++plot ROSE/BNB --wb
+
+# 2022-01-13 20:57:07.045854
++plot ROSE/BNB --fibo
+
+# 2022-01-13 20:59:39.958119
++plot ROSE/BNB --wb
+
+# 2022-01-13 21:00:30.931270
++plot ROSE/BNB --fibo --timerange 1m
+
+# 2022-01-13 21:00:54.611851
++plot ROSE/BNB 
+
+# 2022-01-13 21:01:19.752922
++plot ROSE/BNB --fibo
+
+# 2022-01-13 21:01:25.552800
++plot ROSE/BNB 
+
+# 2022-01-13 21:02:29.072020
++histo ROSE/BNB --timerange 1w --timestart 2021-01-01
+
+# 2022-01-13 21:02:50.865071
++plot ROSE/BNB --timerange 1w --fibo
+
+# 2022-01-13 21:04:04.979324
++plot ROSE/BNB --fibo
+
+# 2022-01-13 21:05:13.295969
++plot ROSE/BNB --fibo --timerange 1m
+
+# 2022-01-13 23:14:48.672292
++plot ROSE/BNB --fibo
+
+# 2022-01-13 23:15:36.901536
++plot ROSE/BNB --wb 
+
+# 2022-01-13 23:17:28.565245
++plot ROSE/BNB --wb-detect 
+
+# 2022-01-13 23:17:44.773279
++plot ROSE/BNB --wb-detect --timerange 1m
+
+# 2022-01-13 23:20:37.961800
++plot ROSE/BNB --wb-fig  --timerange 1m
+
+# 2022-01-13 23:22:04.576925
++plot ROSE/BNB --timerange 1m --wb_fig
+
+# 2022-01-13 23:22:51.669985
++plot ROSE/BNB --timerange 1m --wb_detect
+
+# 2022-01-13 23:25:03.086489
++plot ROSE/BNB --timerange 1m --wb
+
+# 2022-01-13 23:32:29.323602
++trade ROSE/BNB --timerange 1m
+
+# 2022-01-13 23:36:37.718777
++trade ROSE/BNB --timerange 1m --timestart 2022-01-13
+
+# 2022-01-13 23:37:40.589506
++trade ROSE/BNB --timerange 1m --timestart 20220113
+
+# 2022-01-13 23:38:34.559326
++trade ROSE/BNB --timerange 1m --timestart 2022-01-13
+
+# 2022-01-14 05:54:54.369739
++ticker BNB --load
+
+# 2022-01-14 05:58:45.658488
++ticker --stake BNB --load
+
+# 2022-01-14 05:59:17.379519
++ticker --stake BUSD --load
+
+# 2022-01-14 06:10:01.221854
++histo ROSE/BNB --timerange 1m 
+
+# 2022-01-14 06:11:13.931985
++histo ROSE/BNB --print -5
+
+# 2022-01-14 06:12:11.233491
++histo ROSE/BNB --timerange 1m --print -5
+
+# 2022-01-14 06:14:05.998598
++histo ROSE/BNB --load --timerange 1m
+
+# 2022-01-14 06:15:14.682614
++histo ROSE/BNB --timerange 1m --timestart 2022-01-13
+
+# 2022-01-14 06:15:36.021606
++histo  ROSE/BNB --print -5
+
+# 2022-01-14 06:16:19.932759
++histo ROSE/BNB --timerange 1m --print -5
+
+# 2022-01-14 06:23:56.857418
++histo ROSE/BNB --print -5
+
+# 2022-01-14 06:25:09.058019
++histo ROSE/BNB --load
+
+# 2022-01-14 06:25:38.888780
++histo ROSE/BNB
+
+# 2022-01-14 06:25:57.357800
++histo ROSE/BNB --print -5
+
+# 2022-01-14 06:40:57.705722
++histo ROSE/BNB 
+
+# 2022-01-14 07:11:16.609312
++histo ROSE/BNB
+
+# 2022-01-14 07:13:34.663001
++histo ROSE/BNB --print -5
+
+# 2022-01-14 07:17:23.457186
++histo ROSE/BNB
+
+# 2022-01-14 07:17:44.744409
++histo --print -5 ROSE/BNB
+
+# 2022-01-14 07:19:00.230931
++histo ROSE/BNB
+
+# 2022-01-14 07:22:35.589199
++hissto ROSE/BNB
+
+# 2022-01-14 07:22:49.987672
++histo ROSE/BNB
+
+# 2022-01-14 07:27:18.283097
++histo ROSE/BNB --print -5
+
+# 2022-01-14 07:28:05.997712
++histo ROSE/BNB
+
+# 2022-01-14 07:28:29.406421
++histo ROSE/BNB --print -5
+
+# 2022-01-14 07:29:16.481947
++histo ROSE/BNB
+
+# 2022-01-14 07:29:27.160486
++histo ROSE/BNB --print
+
+# 2022-01-14 07:29:45.540372
++histo ROSE/BNB --print -5
+
+# 2022-01-14 07:31:16.993045
++histo ROSE/BNB
+
+# 2022-01-14 07:33:50.397360
++histo ROSE/BNB --print -5
+
+# 2022-01-14 07:34:16.032153
++histo ROSE/BNB
+
+# 2022-01-14 07:38:35.996281
++histo print -5 ROSE/BNB
+
+# 2022-01-14 07:38:53.943051
++histo ROSE/BNB --print -5
+
+# 2022-01-14 07:39:24.095128
++histo ROSE/BNB
+
+# 2022-01-14 07:46:43.885687
++histo ROSE/BNB --print -5
+
+# 2022-01-14 07:49:13.618973
++histo ROSE/BNB
+
+# 2022-01-14 07:52:31.704536
++histo ROE/BNB
+
+# 2022-01-14 07:52:50.377443
++histo ROSE/BNB
+
+# 2022-01-14 07:56:04.637245
++histo ROSE/BNB --print -10
+
+# 2022-01-14 07:57:07.034042
++histo ROSE/BNB
+
+# 2022-01-14 07:58:11.997490
++histo ROSE/BNB --print -5
+
+# 2022-01-14 07:59:48.605601
++histo ROSE/BNB
+
+# 2022-01-14 08:00:16.789979
++histo --print -5
+
+# 2022-01-14 08:00:31.871398
++histo ROSE/BNB --print -5
+
+# 2022-01-14 08:00:54.540376
++histo ROSE/BNB
+
+# 2022-01-14 08:01:15.606804
++histo ROSE/BNB --print -5
+
+# 2022-01-14 08:02:05.070074
++ ROSE/BNB --printplot
+
+# 2022-01-14 08:02:30.105069
++ticker ROSE/BNB --print
+
+# 2022-01-14 08:02:54.888772
++plot ROSE/BNB 
+
+# 2022-01-14 08:04:21.689156
++histo ROSE/BNB
+
+# 2022-01-14 08:05:28.179811
++plot ROSE/BNB --print --timerange 1m
+
+# 2022-01-14 08:06:00.105713
++plot ROSE/BNB 
+
+# 2022-01-14 08:11:02.314411
++plot ROSE/BNB
+
+# 2022-01-14 08:17:24.241951
++plot ROSE/BNB --wb
+
+# 2022-01-14 08:18:54.047996
++plot ROSE/BNB --fibo
+
+# 2022-01-14 08:43:15.114524
++histo ROSE/BNB
+
+# 2022-01-14 08:54:25.567481
++plot ROSE/BNB
+
+# 2022-01-14 08:59:53.840379
++histo ROSE/BNB
+
+# 2022-01-14 09:00:17.574968
++plot ROSE/BNB
+
+# 2022-01-14 09:02:04.240927
++plot ROSE/BNB --wb_fig
+
+# 2022-01-14 09:02:22.340885
++plot ROSE/BNB --wb
+
+# 2022-01-14 09:03:41.809632
++histo ROSE/BNB --print -5
+
+# 2022-01-14 09:04:33.862849
++histo ROSE/BNB
+
+# 2022-01-14 09:05:12.128022
++histo ROSE/BNB 
+
+# 2022-01-14 09:05:49.473160
++histo ROSE/BNB --print -10
+
+# 2022-01-14 10:00:48.722424
++trade ROSE/BNB --backtest
+
+# 2022-01-14 10:02:29.529252
++backtest ROSE/BNB
+
+# 2022-01-14 10:35:50.858197
++histo ROSE/BNB --print -5
+
+# 2022-01-14 10:36:28.775880
++backtest ROSE/BNB
+
+# 2022-01-14 10:40:06.696886
++baacktest ROSE/BNB`
+
+# 2022-01-14 10:40:21.017339
++backtest ROSE/BNB
+
+# 2022-01-14 11:08:51.788164
++backtesting ROSE/BNB
+
+# 2022-01-14 11:09:24.340360
++backtest ROSE/BNB
+
+# 2022-01-14 12:57:36.588680
++bactest ROSE/BNB
+
+# 2022-01-14 12:57:53.411394
++backtest ROSE/BNB
+
+# 2022-01-14 13:19:45.730650
++histo ROSE/BNB --days1
+
+# 2022-01-14 13:20:11.237247
++histo ROSE/BNB --days 1
+
+# 2022-01-14 13:22:58.557260
++backtest ROSE/BNB --days 1
+
+# 2022-01-14 13:24:16.449608
++histo ROSE/BNB --days 1
+
+# 2022-01-14 13:26:19.297963
++histo ROSE/BNB --print -4
+
+# 2022-01-14 13:27:23.377567
++histo ROSE/BNB --days 1
+
+# 2022-01-14 13:27:38.232262
++histo ROSE/BNB --print -4
+
+# 2022-01-14 13:28:00.406464
++histo ROSE/BNB --print -5
+
+# 2022-01-14 13:28:29.182251
++histo ROSE/BNB --days 1
+
+# 2022-01-14 13:51:33.915662
++histo ROSE/BNB
+
+# 2022-01-14 13:54:01.317014
++histo ROSE/BNB --days 1
+
+# 2022-01-14 14:00:12.517857
++histo ROSE/BNB --days 0
+
+# 2022-01-14 14:07:40.252790
++histo ROSE/BNB --days 1
+
+# 2022-01-14 15:47:13.585393
++histo ROSE/BNB
+
+# 2022-01-14 16:19:23.495817
++backtest ROSE/BNB --days 2 --timestart 14-01-2022
+
+# 2022-01-14 16:26:15.766058
++backtest ROSE/BNB --days 2 --timestart 14-01-2002
+
+# 2022-01-14 16:29:22.198324
++backtest ROSE/BNB --days 4 --timestart 13-01-2022
+
+# 2022-01-14 16:41:34.659677
++backtesting ROSE/BNB --days 2 --timestart 14-01-2022
+
+# 2022-01-14 16:42:06.095256
++backtest ROSE/BNB --days 2 --timestart 14-01-2022
+
+# 2022-01-14 16:43:19.077101
++backtest --days 2 --timestart 14-01-2022 ROSE/BNB
+
+# 2022-01-14 16:44:29.742472
++backtest ROSE/BNB --days 2 --timestart 14-01-2022
+
+# 2022-01-14 18:29:18.053406
++backtest ROSE/BNB ROSE/BNB --days 2 --timemstart 14-01-2022
+
+# 2022-01-14 18:34:34.289193
++backtest
+
+# 2022-01-14 22:12:31.781168
++backest
+
+# 2022-01-14 22:12:43.935810
++backtest
+
+# 2022-01-14 22:21:41.788132
++backtes
+
+# 2022-01-14 22:21:53.981253
++backtest
+
+# 2022-01-15 11:33:10.028358
++exit
+
+# 2022-01-15 11:33:16.324156
++backtest
+
+# 2022-01-15 11:33:42.082812
++exit
+
+# 2022-01-15 11:33:50.017317
++backtest
+
+# 2022-01-15 11:40:24.033649
++exit
+
+# 2022-01-15 11:45:10.326956
++backtest
+
+# 2022-01-15 11:46:41.674872
++exit
+
+# 2022-01-15 11:46:45.428159
++backtest
+
+# 2022-01-15 12:04:42.249322
++bactest
+
+# 2022-01-15 12:04:51.212276
++backtest
+
+# 2022-01-15 12:08:33.312626
++exit
+
+# 2022-01-15 12:08:39.937807
++backtest
+
+# 2022-01-15 12:15:37.274245
++exit
+
+# 2022-01-15 12:15:42.824132
++backtest
+
+# 2022-01-15 12:20:16.648828
++exit
+
+# 2022-01-15 12:20:21.565873
++backtest
+
+# 2022-01-15 12:21:35.567148
++exit
+
+# 2022-01-15 12:21:57.925840
++bactest
+
+# 2022-01-15 12:22:06.439349
++backtest
+
+# 2022-01-15 12:23:23.017373
++exit
+
+# 2022-01-15 12:23:28.761561
++backtest
+
+# 2022-01-15 12:24:06.537267
++exit
+
+# 2022-01-15 12:24:13.247895
++backtest
+
+# 2022-01-15 12:25:52.428820
++exit
+
+# 2022-01-15 12:25:58.654568
++backtest
+
+# 2022-01-15 12:27:55.489196
++exit
+
+# 2022-01-15 12:28:10.208055
++backtest
+
+# 2022-01-15 12:30:43.060167
++exit
+
+# 2022-01-15 12:30:48.997577
++backtest
+
+# 2022-01-15 12:33:37.062828
++exit
+
+# 2022-01-15 12:33:42.093184
++backtest
+
+# 2022-01-15 12:34:16.750854
++exit
+
+# 2022-01-15 12:34:22.540179
++backtest
+
+# 2022-01-15 12:35:19.472798
++exit
+
+# 2022-01-15 12:35:26.523776
++backtest
+
+# 2022-01-15 12:35:51.477366
++exit
+
+# 2022-01-15 12:40:47.448399
++backtest
+
+# 2022-01-15 12:41:27.615803
++exit
+
+# 2022-01-15 12:41:49.767456
++backtest
+
+# 2022-01-15 12:57:01.417405
++exit
+
+# 2022-01-15 12:57:05.972534
++backtest
+
+# 2022-01-15 12:59:12.964290
++exit
+
+# 2022-01-15 12:59:18.884611
++backtest
+
+# 2022-01-15 13:08:19.731879
++eit
+
+# 2022-01-15 13:08:32.120497
++backtest
+
+# 2022-01-15 13:09:49.183600
++exit
+
+# 2022-01-15 13:10:00.082270
++backtest
+
+# 2022-01-15 13:10:22.872577
++exit
+
+# 2022-01-15 13:10:37.809462
++backtest
+
+# 2022-01-15 14:25:55.005469
++backtest ROSE/BNB --timerange 1 --timestart 15-01-2022
+
+# 2022-01-15 14:26:51.698245
++backtest
+
+# 2022-01-15 21:02:54.975844
++bcktest
+
+# 2022-01-15 21:03:08.223545
++backtest
+
+# 2022-01-16 14:45:55.840841
++backetst
+
+# 2022-01-16 14:46:19.178319
++backtest
+
+# 2022-01-16 18:38:15.898822
++backtest --timepause 2022-01-16_18:10
+
+# 2022-01-16 18:38:57.126972
++backtest --timepause 16-01-20022_18:10
+
+# 2022-01-16 18:40:56.879093
++backtest --timepause 16-01-2022_18:10
+
+# 2022-01-16 20:14:25.540396
++backtest
+
+# 2022-01-16 21:09:51.630110
++bakstest
+
+# 2022-01-16 21:10:24.175863
++backtest
+
+# 2022-01-16 23:19:07.856381
++backtest --debug 
+
+# 2022-01-17 06:54:04.765182
++backtest
+
+# 2022-01-17 07:31:05.858403
++backtest --debug
+
+# 2022-01-17 07:39:04.157559
++backtest
+
+# 2022-01-17 07:51:31.025213
++backtest --debug
+
+# 2022-01-17 07:54:59.407507
++backtest
+
+# 2022-01-17 08:42:55.342035
++backtest --debug
+
+# 2022-01-17 08:44:39.906353
++histo ROSE/BNB --timeframe 1h --days 8
+
+# 2022-01-17 08:46:52.469023
++backtest --debug
+
+# 2022-01-17 08:51:42.805401
++backtest
+
+# 2022-01-19 23:58:37.573411
++backtes
+
+# 2022-01-20 00:02:13.051218
++backtest
+
+# 2022-01-20 09:29:36.357669
++sbacktest
+
+# 2022-01-20 09:29:46.306903
++backtest
+
+# 2022-01-21 09:39:53.966384
++backtest --debug
+
+# 2022-01-21 09:44:32.230633
++backtest
+
+# 2022-01-21 09:46:39.421162
++backtest --debug
+
+# 2022-01-21 17:08:55.224533
++backtest 
+
+# 2022-01-21 17:09:32.785545
++backtest
+
+# 2022-01-21 17:13:20.953201
++backtest --debug
+
+# 2022-01-21 17:36:52.963013
++backtest
+
+# 2022-01-21 17:54:39.840627
++backtest 
+
+# 2022-01-21 18:28:06.620734
++backtest
+
+# 2022-01-21 21:13:52.894140
++bcktest
+
+# 2022-01-21 21:14:06.474355
++backtest
+
+# 2022-01-21 21:21:41.581569
++backtest 
+
+# 2022-01-21 21:25:50.327799
++backtest
+
+# 2022-01-21 21:31:05.926489
++backtest --timeto 21-01-2022_18:00
+
+# 2022-01-21 21:48:21.088836
++backtest
+
+# 2022-01-21 23:33:43.090050
++backtest --timeto 21-01-2022_23:00
+
+# 2022-01-22 15:49:41.524654
++backtest
+
+# 2022-01-23 15:13:13.844267
++backtest 
+
+# 2022-01-23 15:14:48.443082
++backtest --debug --timestart 22-01-2022_15:00 --timeto 23-01-2022_21:00
+
+# 2022-01-23 15:31:05.007163
++backtest --debug --pausestart 23-01-2022_18:00 --pausestop 23-01-2022_21:00
+
+# 2022-01-23 15:33:41.546723
++backtest --debug --pausestart 22-01-2022_15:00 --pausestop 22-01-2022_21:00
+
+# 2022-01-23 23:24:13.515599
++backtest 
+
+# 2022-01-23 23:26:35.468467
++backtest --debug --pausestart 22-01-2022_15:00 --pausestop 22-01-2022_16:00
+
+# 2022-01-23 23:27:51.960381
++backtest --debug --pausestart 23-01-2022_03:00 --pausestop 23-01-2022_04:00
+
+# 2022-01-24 09:53:08.131363
++backtest
+
+# 2022-01-24 11:54:03.144356
++backketst
+
+# 2022-01-24 11:54:14.197578
++backtest
+
+# 2022-01-24 14:32:53.882747
++baktest
+
+# 2022-01-24 14:33:04.363282
++backtest
+
+# 2022-01-24 22:01:40.477153
++backtest --debug --pausestart 24-01-2022_07:00 --pausestop 24-01-2022_07:40
+
+# 2022-01-24 22:16:20.852324
++backtest --debug --pausestart 24-01-20022_06:00 
+
+# 2022-01-24 22:16:51.307637
++backtest --debug --pausestart 24-01-20022_06:00 --pausestop 24-01-2022_07:00
+
+# 2022-01-24 22:17:30.330353
++--debug --pausestart 24-01-2022_06:00 --pausestop 24-01-2022_07:00
+
+# 2022-01-24 22:18:11.009454
++backtest --debug --pausestart 24-01-2022_06:00 --pausestop 24-01-2022_07:00
+
+# 2022-01-24 22:28:00.350748
++--debug --pausestart 24-01-2022_00:30 --pausestop 24-01-2022_00:50
+
+# 2022-01-24 22:29:05.277747
++--debug --pausestart 24-01-2022_00:30 --pausestop 24-01-2022_00:50backtest
+
+# 2022-01-24 22:30:33.330602
++backtest --debug --pausestart 24-01-2022_00:30 --pausestop 24-01-2022_00:50
+
+# 2022-01-24 22:36:32.821930
++backtest --debug --pausestart 23-01-2022_23:00 --pausestop 24-01-2022_00:00
+
+# 2022-01-24 22:47:13.921326
++backtest --debug --pausestart 24-01-2022_19:20 --pausestop 24-01-2022_19:40
+
+# 2022-01-25 08:41:43.414111
++backtest
+
+# 2022-01-25 12:11:22.576701
++backetst
+
+# 2022-01-25 12:11:35.710076
++backtest
+
+# 2022-01-25 12:24:59.258136
++backtest --timestart 20-01-2022
+
+# 2022-01-25 12:25:22.008340
++backtest 20-01-2024_00:00
+
+# 2022-01-25 12:25:39.460410
++backtest 22-01-2024_00:00
+
+# 2022-01-25 12:25:50.356587
++backtest 23-01-2024_00:00
+
+# 2022-01-25 12:26:13.548465
++backtest --timestart backtest 22-01-2024_00:00
+
+# 2022-01-25 12:26:24.770553
++>backtest --timestart backtest 22-01-2022_00:00
+
+# 2022-01-25 12:27:59.372730
++backtest --timestart  22-01-2022_00:00
+
+# 2022-01-25 12:38:51.580509
++backtest --timestart  20-01-2022_00:00
+
+# 2022-01-25 12:44:03.413641
++backtest
+
+# 2022-01-25 12:49:21.242902
++backtes
+
+# 2022-01-25 12:49:30.825172
++backtest
+
+# 2022-01-25 21:55:23.352459
++backtets
+
+# 2022-01-25 21:55:36.227290
++backtest
+
+# 2022-01-26 14:54:37.874632
++backtest --timestart 25-01-2022_16:00
+
+# 2022-01-26 18:54:49.897292
++backtest --timestart 25-01-2022_15:00
+
+# 2022-01-26 18:58:39.278118
++backtest --timestart 25-01-2022_20:00
+
+# 2022-01-26 20:03:20.168686
++backtest
+
+# 2022-01-26 22:54:30.718779
++backtest --timeframe 15m
+
+# 2022-01-26 22:55:12.527294
++backtest --timerange 15m
+
+# 2022-01-26 23:03:50.813658
++backtest --timerange 15m --timestart 24-01-2022_00:00
+
+# 2022-01-26 23:06:18.232438
++backtest

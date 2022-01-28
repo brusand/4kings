@@ -199,7 +199,8 @@ class Telegram:
         Stops all running telegram threads.
         :return: None
         """
-        self._updater.stop()
+        if hasattr(self, '_updater'):
+            self._updater.stop()
 
     def _update_msg(self, query: CallbackQuery, msg: str, callback_path: str = "",
                     reload_able: bool = False, parse_mode: str = ParseMode.MARKDOWN) -> None:

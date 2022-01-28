@@ -42,8 +42,6 @@ from decimal import Decimal
 from typing import Dict, List, Optional, Tuple, Union
 import arrow
 from pandas import DataFrame
-import talib.abstract as ta
-from plotly.subplots import make_subplots
 
 #         trade ROSE/BNB --timerange 1m -timestart 2022-01-12
 ECOCLASS_START = 5 #0.618
@@ -153,7 +151,7 @@ class FourKings():
         self.parser_trade.add_argument('--stake', help='stake', required=False, default='*')
         self.parser_trade.add_argument('--ticker', help='ticker', required=False, default='*')
         self.parser_trade.add_argument('--dry', help='dry', required=False, default=True)
-        self.parser_trade.add_argument('--timerange', help='time range', required=False, default='30m')
+        self.parser_trade.add_argument('--timerange', help='time range', required=False, default='1h')
         self.parser_trade.add_argument('--timestart', help='time start', required=False)
         self.parser_trade.add_argument('--timeto', help='time to', required=False)
         self.parser_trade.add_argument('--days', help='days', type=int, action="store", required=False, default=0)
@@ -164,13 +162,13 @@ class FourKings():
         self.parser_backtest.add_argument('--stake', help='stake', required=False, default='*')
         self.parser_backtest.add_argument('--ticker', help='ticker', required=False, default='*')
         self.parser_backtest.add_argument('--dry', help='trend', required=False, default='FISRTCLASS')
-        self.parser_backtest.add_argument('--timerange', help='time range', required=False, default='5m')
-        self.parser_backtest.add_argument('--timestart', help='time start', required=False, default='21-01-2022_21:00')
+        self.parser_backtest.add_argument('--timerange', help='time range', required=False, default='1m')
+        self.parser_backtest.add_argument('--timestart', help='time start', required=False, default='21-01-2022_00:00')
         self.parser_backtest.add_argument('--timeto', help='time to', required=False)
         self.parser_backtest.add_argument('--debug', help='debug', action="store_true", default=False)
-        self.parser_backtest.add_argument('--pausestart', help='time to', required=False, default='21-01-2022_01:40')
+        self.parser_backtest.add_argument('--pausestart', help='time to', required=False, default='21-01-2022_01:30')
         self.parser_backtest.add_argument('--pausestop', help='time to', required=False, default='21-01-2022_01:50')
-        self.parser_backtest.add_argument('--days', help='days', type=int, action="store", required=False, default=5)
+        self.parser_backtest.add_argument('--days', help='days', type=int, action="store", required=False, default=1)
         self.parser_backtest.add_argument('--hours', help='days', type=int, action="store", required=False, default=0)
         self.parser_backtest.add_argument('--minutes', help='days', type=int, action="store", required=False, default=0)
         self.parser_backtest.set_defaults(func=self.backtest)
@@ -783,8 +781,7 @@ class FourKings():
         fig.show()
 
 
-    def plot_figure(self, fig,  variables, df, args):
-        dataframe = df
+    def plot_figure(self, fig,  variables, dataframe, args):
         dataframe = dataframe.apply(pd.to_numeric)
         dataframe['otime'] = pd.to_datetime( dataframe['otime'], unit='ms')
         #fig = go.Figure()
@@ -795,26 +792,21 @@ class FourKings():
                     low=dataframe['low'],
                     close=dataframe['close'],
                     name = "Candlestick"),
-                    #go.Scatter(x=dataframe['otime'], y=dataframe['pol_close'], line=dict(color='green', width=1)),
-                    #go.Scatter(x=dataframe['otime'], y=dataframe['pol_decimal'], line=dict(color='red', width=1)),
+                    go.Scatter(x=dataframe['otime'], y=dataframe['pol_close'], line=dict(color='green', width=1)),
+                    go.Scatter(x=dataframe['otime'], y=dataframe['pol_mean'], line=dict(color='red', width=1)),
                     #go.Scatter(mode='markers',
                     #    x=dataframe['otime'],
-                    #    y=dataframe['buy_signal'],
+                    #    y=dataframe['buy'],
                     #    marker=dict(
                     #        color='LightSkyBlue',
-                    #        size=1,
+                    #        size=20,
+                    #        line=dict(
+                    #            color='MediumPurple',
+                    #            width=2
+                    #        )
                     #    ),
                     #    showlegend=False
-                    #),
-                    #go.Scatter(mode='markers',
-                    #             x=dataframe['otime'],
-                    #             y=dataframe['sell_signal'],
-                    #             marker=dict(
-                    #                 color='LightGreen',
-                    #                 size=1,
-                    #             ),
-                    #             showlegend=False
-                    #             )
+                    #)
                     ])
         fig.show()
 
@@ -942,7 +934,7 @@ class FourKings():
 
 
 
-    def plot_fibo1(self, df, fig, ax, variables, args):
+    def plot_fibo(self, df, fig, ax, min, max, args):
         #andlestick_ohlc(ax, df.values, width=0.6, colorup='green', colordown='red', alpha=0.8)
 
         # Setting labels & titles
@@ -983,38 +975,6 @@ class FourKings():
         ax.axhspan(level3_down, level2_down, alpha=0.5, color='lime')
         ax.axhspan(level2_down, price_max, alpha=0.5, color='skyblue')
 
-        #ax.hlines([level6_down_up, level6_down_down], 0, 50, transform=ax.get_yaxis_transform(), colors='r')
-        fig.show()
-
-    def plot_fibo_zones(self, df, fig, ax, metadata, args):
-        #andlestick_ohlc(ax, df.values, width=0.6, colorup='green', colordown='red', alpha=0.8)
-        fig, ax = plt.subplots()
-
-        # Setting labels & titles
-        plt.xticks(df.close, df['otime'].values)
-        ax.set_xlabel('Date')
-        ax.set_ylabel('Price')
-        #fig.subtitle('Daily Candlestick Chart of ' + ticker)
-
-        # Formatting Date
-        date_format = mdates.DateFormatter('%d-%m-%Y %H:%M')
-        ax.xaxis.set_major_formatter(date_format)
-
-
-        fig.tight_layout()
-        #if len(df) >= 60:
-        #    ax.plot(df.close.rolling(60).close, color='black')
-        #else:
-        ax.plot(df.close, color='black')
-
-        ax.axhspan(metadata['min'], metadata['l886_down'], alpha=0.4, color='lightsalmon')
-        ax.axhspan(metadata['l886_down'], metadata['l786_eco_class_down'] , alpha=0.4, color='salmon')
-        ax.axhspan(metadata['l786_eco_class_down'] , metadata['l618_1class_down'], alpha=0.5, color='honeydew')
-        ax.axhspan(metadata['l618_1class_down'], metadata['l5_down'], alpha=0.5, color='grey')
-        ax.axhspan(metadata['l5_down'], metadata['l382_take_profit_down'], alpha=0.5, color='lightgreen')
-        ax.axhspan(metadata['l382_take_profit_down'], metadata['l236_down'] , alpha=0.5, color='lime')
-        ax.axhspan(metadata['l236_down'] ,metadata['l114_down'], alpha=0.5, color='skyblue')
-        ax.axhspan(metadata['l114_down'] ,metadata['max'], alpha=0.5, color='skyblue')
         #ax.hlines([level6_down_up, level6_down_down], 0, 50, transform=ax.get_yaxis_transform(), colors='r')
         fig.show()
 
@@ -1157,6 +1117,230 @@ class FourKings():
 
         self.plot_display(args)
 
+    def backtest_process(self, args):
+        #self.config['users'][self.user]['process']['trade_' + trade + '_id'] = 'running'
+        self.get_histos(args)
+        dataframe = self.get_ticker_histo(args.stake, args.ticker, args.timerange)
+
+
+        # fig = go.Figure(data=[go.Candlestick(x=dataframe.index,
+        #                                     open=dataframe['open'],
+        #                                     high=dataframe['high'],
+        #                                     low=dataframe['low'],
+        #                                     close=dataframe['close'], name='market data')])
+
+        # Show
+
+        df = pd.DataFrame([], columns=['otime', 'open', 'high', 'low', 'close', 'volume', 'ctime', 'quote',
+                                         'trades', 'TB Base Volume', 'TB Quote Volume', 'ignore'])
+        variables = {}
+        variables['onPosition'] = False
+        variables['cash'] = 100
+        variables['l_min'] = []
+        variables['l_max'] = []
+        variables['max_val'] = []
+        variables['min_max_val'] = []
+        variables['buy'] = []
+        variables['sell'] = []
+        variables['trend'] = ['NONE']
+        variables['signal'] = ''
+        variables['pol'] = []
+        variables['SH'] = []
+        variables['SL'] = []
+        variables['profits'] = 0
+        variables['cash'] = 100
+        variables['started'] = False
+        variables['lookback'] = []
+        variables['clock'] = ''
+        variables['trading_zone'] = []
+        variables['x-data'] = []
+        variables['x-data-time'] = []
+        variables['pol'] = []
+        variables['pol-pivot'] = []
+        variables['pol-5'] = []
+        variables['pol-10'] = []
+        variables['pol-15'] = []
+        variables['pol-20'] = []
+        variables['pol-30'] = []
+        variables['pol-60'] = []
+        variables['pol_mean'] = []
+        variables['action'] = ''
+
+        pol = 0
+        started = False
+        fig, ax = plt.subplots()
+        #timestart history
+        #timestart
+        for index, row in dataframe.iterrows():
+            df = df.append(dataframe.iloc[index], ignore_index=True)
+
+            last_candle = df.iloc[-1]
+            #print('trading', dtime.fromtimestamp(last_candle['ctime'] / 1000), last_candle['close'])
+
+            if len(df) > 3 :
+                #variables['lookback'].append(last_candle_processed)
+
+                if dtime.strptime(args.timestart, '%d-%m-%Y_%H:%M') <= dtime.fromtimestamp(last_candle['otime'] / 1000) and dtime.strptime(args.timestop, '%d-%m-%Y_%H:%M') > dtime.fromtimestamp(last_candle['otime'] / 1000):
+                    if variables['started'] == False:
+                        variables['past_min'] = df.low.min()
+                        variables['past_max'] = df.high.max()
+
+                    variables['started'] = True
+
+                    variables['clock'] = dtime.fromtimestamp((int(df.iloc[-1].otime) / 1000)).strftime("%d/%m/%Y %H:%M")
+                    #last_candle_processed = self.candle_process(variables, df, args)
+
+                    last_candle_processed = self.candle_process_freq(variables, df, args)
+
+                    print(variables['clock'], variables['signal'])
+
+                    #print(dtime.fromtimestamp(int(df.iloc[-1].otime) / 1000).strftime("%d/%m/%Y %H:%M"), 'dataframe',
+                    #      len(dataframe), df.iloc[-1], df.iloc[-2])
+                    #print(dtime.fromtimestamp(last_candle['ctime'] / 1000), 'trading', len(min_max), len(l_min), len(l_max))
+
+                    if variables['started'] == False:
+                        variables['started'] = True
+
+                    #if variables['started']:
+                        #self.plot_pol3(df, variables, args)
+
+                    if variables['signal'] == 'BUY' and variables['onPosition'] == False:
+                        print('BUY', last_candle.close)
+                        variables['buyPosition'] = last_candle.close
+                        variables['onPosition'] = True
+                        #self.plot_figure(fig, variables, df, args)
+                        variables['signal'] = ''
+                        #self.plot_pol3(df, variables, args)
+
+                    if variables['signal'] == 'SELL' and variables['onPosition'] == True:
+                        variables['profits'] += last_candle.close - variables['buyPosition']
+                        print('SELL', last_candle.close, last_candle.close - last_candle.close, variables['profits'],
+                              variables['cash'] + variables['cash'] * variables['profits'])
+                        variables['onPosition'] = False
+                        #self.plot_wb(df, fig, ax, args)
+                        #self.plot_pol3(df, variables, args)
+
+                    if variables['action'] == 'SELLING':
+                        self.plot_pol3(df, variables, args)
+
+                    if args.debug and dtime.strptime(args.pausestart, '%d-%m-%Y_%H:%M') <= dtime.fromtimestamp(last_candle['otime'] / 1000) and dtime.strptime(args.pausestop, '%d-%m-%Y_%H:%M') >= dtime.fromtimestamp(last_candle['otime'] / 1000) :
+                        self.plot_figure(fig, variables, df, args)
+                        #self.plot_wb(df, fig, ax, args)
+                        #self.plot_fibo(df.iloc[-24:], fig, ax, variables['past_min'], variables['past_max'], args)
+                        #self.plot_pol2(df, variables, args)
+                        #self.plot_fibo(df.iloc[-24:], fig, ax, variables['past_min'], variables['past_max'], args)
+
+
+
+                    #else:
+                    #last_candle_processed = self.candle_process(variables, df, args)
+                else:
+                    last_candle_processed = self.candle_process(variables, df, args)
+        #for each row
+        #self.plot_wb(df, fig, ax, args)
+        #self.plot_fibo(df.iloc[-9*60:], fig, ax, variables['past_min'], variables['past_max'], args)
+
+
+
+    def candle_process(self, variables, dataframe, args):
+        last_candle = dataframe.iloc[-1]
+        x_data = dataframe.index.tolist()  # the index will be our x axis, not date
+        y_data_low = dataframe['low']
+        y_data_close= dataframe['close']
+        y_data_pivot = (last_candle.high - last_candle.low) / 2
+
+
+        # x values for the polynomial fit, 200 points
+
+        x = np.linspace(0, max(dataframe.index.tolist()), max(dataframe.index.tolist()) + 1)
+        variables['x-data-time'].append(dataframe['otime'].tolist())
+
+        # polynomial fit of degree xx
+        pol = np.polyfit(x_data, y_data_close, 21) #31)
+        data = np.polyval(pol, x)
+        #variables['pol'] = data
+
+        #pol-pivot = np.polyfit(x_data, y_data_pivot, 21) #31)
+        #data_pivot = np.polyval(pol, x)
+        #variables['pol-pivot'] = data_pivot
+
+        #           ___ detection of local minimums and maximums ___
+
+        min_max = np.diff(np.sign(np.diff(data))).nonzero()[0] + 1  # local min & max
+        l_min = (np.diff(np.sign(np.diff(data))) > 0).nonzero()[0] + 1  # local min
+        l_max = (np.diff(np.sign(np.diff(data))) < 0).nonzero()[0] + 1  # local max
+
+
+        variables['x_data'] = x_data
+        variables['y_data'] = y_data_close
+        variables['x'] = x
+        variables['y_pol'] = data
+
+
+        #_pol = Decimal( str(data[-1]).split('.')[0] + '.' +
+        #                str(data[-1]).split('.')[1][0:len(str(last_candle.close).split('.')[1])-2])
+
+        pol_decimal = Decimal(str(data[-1]).split('.')[0] + '.' +
+                str(data[-1]).split('.')[1][0:len(str(last_candle.close).split('.')[1]) - 2])
+        variables['pol'].append(pol_decimal)
+        dataframe['pol'] =  pol_decimal
+
+        if len(dataframe) > 5:
+            dataframe['pol_mean'] = dataframe['pol'].rolling(5).mean()
+            variables['pol_mean'].append(dataframe['pol_mean'].iloc[-1])
+
+        #if len(dataframe) > 60:
+            #variables['pol-5'].append(variables['y_pol'][-5])#pol_T = T.fit(x_data, y_data, 31)
+            #variables['pol-10'].append(variables['y_pol'][-10])
+            #variables['pol-15'].append(variables['y_pol'][-15])
+            #variables['pol-20'].append(variables['y_pol'][-20])
+            #variables['pol-30'].append(variables['y_pol'][-30])  # pol_T = T.fit(x_data, y_data, 31)
+            #variables['pol-60'].append(variables['y_pol'][-60])
+        #if len(min_max) > 2:
+        #    dataframe['valid'] = np.where( min_max[-1] - min_max[-2] > 10  ,1, 0)
+        # if trend > 0 and trend(-1)  < 0 -> start  buying
+
+
+        if variables['started'] == True and len(data) > 2 and len(variables['pol_mean']) > 2:
+            if  data[-1] > data[-2]:
+                variables['trend'].append('UP')
+
+            if  data[-1] < data[-2]:
+                # get the amount of bitcoin we have in our account
+                variables['trend'].append('DOWN')
+
+
+            if variables['pol_mean'][-1] >  variables['pol_mean'][-2]:
+                variables['signal'] = 'BUY'
+                variables['action'] = 'SELLING'
+
+
+            if variables['pol_mean'][-1] <  variables['pol_mean'][-2]:
+                variables['signal'] = 'SELL'
+                variables['action'] = 'BUYING'
+
+
+            #if len(dataframe) > 5 and self.plot_wb(df, fig, ax, args):
+            #if variables['trend'][-1] == 'UP' and  last_candle.close < variables['pol'][-1]:
+            #    variables['signal'] = 'BUY'
+
+
+            #if variables['trend'][-1] == 'DOWN' and  variables['trend'][-2] == 'UP':
+            #    variables['signal'] = 'SELL'
+
+
+            #if variables['signal'] == 'BUYING' and variables['pol']['-1'] < variables['pol'][-2]:
+            #    variables['signal'] = 'BUY'
+
+            #if variables['signal'] == 'SELLING' and variables['pol']['-1'] > variables['pol'][-2]:
+            #    variables['signal'] = 'SELL'
+
+            # if variables.signal == 'BUYING' and variables.onPosition == False:
+            #print(variables['trend'],dataframe.iloc[-1]['close'])
+            # -1 100.00559
+            # -4 100.01088
+
+        return last_candle
 
     def detect_wb(self, zone):
 
@@ -1296,6 +1480,7 @@ class FourKings():
 
 
     def _get_historical_data(self, symbol, timerange, args):
+
         # Create timedelta to get exact minute for end of historical data
         history_end = str(self.start_time.replace(second=0, microsecond=0) - timedelta(seconds=1))
         # Get historical klines up until current minute, truncating
@@ -1520,7 +1705,25 @@ class FourKings():
         :return: a Dataframe with all mandatory indicators for the strategies
         """
 
-        #self.set_fibo(dataframe, metadata)
+        x_data = dataframe.index.tolist()  # the index will be our x axis, not date
+
+        y_data_close = dataframe['close']
+
+
+        x = np.linspace(0, max(dataframe.index.tolist()), max(dataframe.index.tolist()) + 1)
+
+        pol_close = np.polyfit(x_data, y_data_close, 21)
+        dataframe['pol_close'] = np.polyval(pol_close, x)
+
+        dataframe['pol_mean'] = dataframe['pol_close'].rolling(5).mean()
+
+        #if len(min_max) > 2:
+        #    dataframe['valid'] = np.where( min_max[-1] - min_max[-2] > 10  ,1, 0)
+        # if trend > 0 and trend(-1)  < 0 -> start  buying
+            # if start_buing and close < pol -> buy, a  action = action -1
+            # if action =
+
+
         """
         # first check if dataprovider is available
         if self.dp:
@@ -1532,34 +1735,6 @@ class FourKings():
 
         return dataframe
 
-
-    def pourcentage(self, data, l_max, l_min, last_candle):
-        if len(l_max) == 0 and len(l_min) == 0:
-            return 0.00
-
-
-        trend = 1 * l_max[-1] - l_min[-1]
-
-
-
-        l_min_decimal = Decimal(str(data[l_min[-1]]).split('.')[0] + '.' +
-                                str(data[l_min[-1]]).split('.')[1][0:len(str(last_candle.close).split('.')[1]) - 1])
-        l_max_decimal = Decimal(str(data[l_max[-1]]).split('.')[0] + '.' +
-                                str(data[l_max[-1]]).split('.')[1][0:len(str(last_candle.close).split('.')[1]) - 1])
-
-
-        if min == 0.00 or l_min_decimal == 0.00:
-            return 0.00
-
-        _fraction = (l_max_decimal - l_min_decimal) / l_min_decimal
-
-        if _fraction == 0 or min == 0.00:
-            _pourcent_int_str = 0.0
-        else:
-            _pourcent_str  = str(_fraction).split('.')[1][:4]
-            _pourcent_int_str = _pourcent_str[0:2]+'.'+ _pourcent_str[2:4]
-        return trend * float(_pourcent_int_str)
-
     def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Based on TA indicators, populates the buy signal for the given dataframe
@@ -1567,14 +1742,10 @@ class FourKings():
         :param metadata: Additional information, like the currently traded pair
         :return: DataFrame with buy column
         """
-        #print('buying', dataframe['pol_close'].iloc[-1], dataframe['pol_close'].iloc[-2])
-
         dataframe.loc[
             (
-               (dataframe['close'] <  metadata['l786_eco_class_down'])
-                # &
-               #(dataframe['mfi'] > 99) &
-               #(dataframe['close'] < dataframe['pol_close'])
+               (dataframe['pol_mean'] >  dataframe['pol_mean'].shift(1)) &
+               (dataframe['close'] < dataframe['pol_close'])
                #(dataframe['close'] < dataframe['open']) &
                #(dataframe['close'] == dataframe['low']) &
                #(dataframe['open'] == dataframe['high']) &
@@ -1592,10 +1763,10 @@ class FourKings():
         :param metadata: Additional information, like the currently traded pair
         :return: DataFrame with sell column
         """
+
         dataframe.loc[
             (
-                (dataframe['close'] > metadata['l382_take_profit_down'])
-                #(dataframe['close'] > metadata['l382_take_profit_down'])
+                (dataframe['pol_mean'] < dataframe['pol_mean'].shift(1))
                 #(dataframe['close'] > dataframe['open']) &
                 ##(dataframe['close'] == dataframe['high']) &
                 #(dataframe['open'] == dataframe['low']) &
@@ -1610,427 +1781,35 @@ class FourKings():
 
         df = self.populate_indicators(dataframe, variables)
 
-        if len(df) > 2:
-            df_buy = self.populate_buy_trend(df, variables)
-            buy_values = df_buy['buy'].values
-            dataframe['buy_signal'] = np.where(df_buy['buy'].values[-1] == 1 , last_candle.low, None)
+        df_buy = self.populate_buy_trend(df, variables)
+        buy_values = df_buy['buy'].values
+        df_sell = self.populate_sell_trend(df, variables)
+        sell_values = df_buy['sell'].values
 
+        mean_values = df['pol_mean'].values
 
-            df_sell = self.populate_sell_trend(df, variables)
-            sell_values = df_buy['sell'].values
-            dataframe['sell_signal'] = np.where(df_buy['sell'].values[-1] == 1 , last_candle.low, None)
+        if buy_values[-1] is not None and buy_values[-1] == 1:
+            variables['trend'].append('BUYING')
 
-            fibo_zone = self.get_fibo_zone(df, variables, last_candle.close)
-            if last_candle.close < variables['min']:
-                self.set_fibo(dataframe, variables, df.low.min(), df.high.max())
-                return last_candle
+        if sell_values[-1] is not None and sell_values[-1] == 1:
+            variables['trend'].append( 'SELLING' )
 
-            if last_candle.close  > variables['max']:
-                self.set_fibo(dataframe, variables, df.low.min(), df.high.max())
-                return last_candle
+        if sell_values[-1] is None and buy_values[-1] is None:
+            variables['trend'].append( variables['trend'][-1] )
 
-            #if self.buying(df, variables):
-            if dataframe['close'].values[-1] <  variables['l786_eco_class_down'] and  dataframe['close'].values[-1] > variables['l886_down']:
-                variables['signal'] = 'BUY'
-                #variables['trend'].append('BUYING')
+        if len(mean_values) > 2 and variables['trend'][-1] == 'BUYING' and  mean_values[-1] > mean_values[-2]:
+            variables['signal'] = 'BUY'
+            variables['trend'][-1] = 'BUY'
+            print('BUY', last_candle.close)
 
-            if dataframe['close'].values[-1] >  variables['l382_take_profit_down'] and dataframe['close'].values[-1] > variables['min']:
-                variables['signal'] = 'SELL'
-                #variables['trend'].append( 'SELLING' )
-
-
-            #if sell_values[-1] is None and buy_values[-1] is None:
-                #variables['trend'].append( variables['trend'][-1] )
-
-        #if len(mean_values) > 2 and variables['trend'][-1] == 'BUYING' and  mean_values[-1] > mean_values[-2]:
-        #    variables['signal'] = 'BUY'
-        #    variables['trend'][-1] = 'BUY'
-            #print('BUY', last_candle.close)
-
-        #if len(mean_values) > 2 and variables['trend'][-1] == 'SELLING' and  mean_values[-1] < mean_values[-2]:
-        #    variables['signal'] = 'SELL'
-        #    variables['trend'][-1] = 'SELL'
-        #    print('SELL', last_candle.close)
+        if len(mean_values) > 2 and variables['trend'][-1] == 'SELLING' and  mean_values[-1] < mean_values[-2]:
+            variables['signal'] = 'SELL'
+            variables['trend'][-1] = 'SELL'
+            print('SELL', last_candle.close)
 
         #df['buy_signal'] = np.where(df['buy' == 1, last_candle.close, nan])
         #df['sell_signal'] = np.where(df['sell' == 1, last_candle.close, nan])
-        #if len(mean_values) > 1:
-        #   print('trend', variables['trend'][-1], mean_values[-1], variables['signal'] )
-        return last_candle
-
-    def buying(self, dataframe, variables):
-        if len(variables['profitables']) > 2 and len(dataframe['pol_close']) > 4:
-            if dataframe['pol_close'].values[-1] == dataframe['pol_close'].values[-2]\
-                    and dataframe['mfi'].values[-1] == 0.0 and dataframe['mfi'].values[-2] == 0.0\
-                    and np.abs(variables['profitables'][-1] == 0) and np.abs(variables['profitables'][-2] == 0):
-                return True
-        return False
-
-    def selling(self, dataframe, variables):
-        if len(variables['profitables']) > 2  and len(dataframe['pol_close']) > 4:
-            if dataframe['pol_close'].values[-1] == dataframe['pol_close'].values[-2]\
-                    and dataframe['mfi'].values[-1] > 95 and dataframe['mfi'].values[-2] > 95\
-                    and np.abs(variables['profitables'][-1] > 100) and np.abs(variables['profitables'][-2] > 100):
-                return True
-        return False
-
-    def backtest_process(self, args):
-        #self.config['users'][self.user]['process']['trade_' + trade + '_id'] = 'running'
-        self.get_histos(args)
-        dataframe = self.get_ticker_histo(args.stake, args.ticker, args.timerange)
-
-
-        # fig = go.Figure(data=[go.Candlestick(x=dataframe.index,
-        #                                     open=dataframe['open'],
-        #                                     high=dataframe['high'],
-        #                                     low=dataframe['low'],
-        #                                     close=dataframe['close'], name='market data')])
-
-        # Show
-
-        df = pd.DataFrame([], columns=['otime', 'open', 'high', 'low', 'close', 'volume', 'ctime', 'quote',
-                                         'trades', 'TB Base Volume', 'TB Quote Volume', 'ignore'])
-        variables = {}
-        variables['onPosition'] = False
-        variables['cash'] = 100
-        variables['l_min'] = []
-        variables['l_max'] = []
-        variables['max_val'] = []
-        variables['min_max_val'] = []
-        variables['buy'] = []
-        variables['sell'] = []
-        variables['trend'] = ['NONE']
-        variables['signal'] = ''
-        variables['pol'] = []
-        variables['SH'] = []
-        variables['SL'] = []
-        variables['profits'] = 0
-        variables['cash'] = 100
-        variables['started'] = False
-        variables['lookback'] = []
-        variables['clock'] = ''
-        variables['trading_zone'] = []
-        variables['x-data'] = []
-        variables['x-data-time'] = []
-        variables['pol'] = []
-        variables['pol-pivot'] = []
-        variables['pol-5'] = []
-        variables['pol-10'] = []
-        variables['pol-15'] = []
-        variables['pol-20'] = []
-        variables['pol-30'] = []
-        variables['pol-60'] = []
-        variables['pol_mean'] = []
-        variables['profitables'] = []
-        variables['action'] = ''
-
-        pol = 0
-        started = False
-        fig, ax = plt.subplots()
-        #timestart history
-        #timestart
-        for index, row in dataframe.iterrows():
-            df = df.append(dataframe.iloc[index], ignore_index=True)
-
-            last_candle = df.iloc[-1]
-            #print('trading', dtime.fromtimestamp(last_candle['ctime'] / 1000), last_candle['close'])
-
-            if len(df) > 3 :
-                #variables['lookback'].append(last_candle_processed)
-
-                if dtime.strptime(args.timestart, '%d-%m-%Y_%H:%M') <= dtime.fromtimestamp(last_candle['otime'] / 1000):
-                    if variables['started'] == False:
-                        self.set_fibo(dataframe, variables, df.low.min(), df.high.max())
-                        #self.plot_figure(fig, variables, dataframe, args)
-                        #self.plot_figure(fig, variables, df, args)
-                        self.plot_fibo_zones(df, fig, ax, variables, args)
-                    variables['started'] = True
-
-                    variables['clock'] = dtime.fromtimestamp((int(df.iloc[-1].otime) / 1000)).strftime("%d/%m/%Y %H:%M")
-                    #last_candle_processed = self.candle_process(variables, df, args)
-
-                    last_candle_processed = self.candle_process_freq(variables, df, args)
-
-                    #print(variables['clock'], variables['trend'][-1], variables['signal'])
-
-                    if variables['signal'] == 'BUY' and variables['onPosition'] == False:
-                        print(dtime.fromtimestamp((int(last_candle.otime) / 1000)).strftime("%d/%m/%Y %H:%M"), 'BUY', last_candle.close)
-                        self.plot_fibo_zones(df, fig, ax, variables, args)
-                        variables['buyPosition'] = last_candle.close
-                        variables['onPosition'] = True
-                        #self.plot_figure(fig, variables, df, args)
-                        variables['signal'] = ''
-                        #self.plot_wb(df, fig, ax, args)
-                        #self.plot_figure(fig, variables, df, args)
-
-                    if variables['onPosition'] == True or variables['signal'] == 'FIBO':
-                        #self.plot_fibo_zones(df, fig, ax, variables, args)
-                        variables['signal'] = ''
-
-                    if variables['signal'] == 'SELL' and variables['onPosition'] == True:
-                        variables['profits'] += last_candle.close - variables['buyPosition']
-                        print(dtime.fromtimestamp((int(last_candle.otime) / 1000)).strftime("%d/%m/%Y %H:%M"), 'SELL', last_candle.close, last_candle.close - last_candle.close, variables['profits'],
-                              variables['cash'] + variables['cash'] * variables['profits'])
-                        variables['onPosition'] = False
-                        #self.plot_wb(df, fig, ax, args)
-                        #self.plot_wb(df, fig, ax, args)
-                        #self.plot_figure(fig, variables, df, args)
-
-
-
-                    if variables['action'] == 'SELLING':
-                        self.plot_pol3(df, variables, args)
-
-                    if args.debug and dtime.strptime(args.pausestart, '%d-%m-%Y_%H:%M') <= dtime.fromtimestamp(last_candle['otime'] / 1000) and dtime.strptime(args.pausestop, '%d-%m-%Y_%H:%M') >= dtime.fromtimestamp(last_candle['otime'] / 1000) :
-
-                        #self.plot_wb(df, fig, ax, args)
-                        #self.plot_figure(fig, variables, df, args)
-                        #self.plot_wb(df, fig, ax, args)
-                        self.plot_fibo_zones(df, fig, ax, variables, args)
-                        #self.plot_pol2(df, variables, args)
-                        #self.plot_fibo(df.iloc[-24:], fig, ax, variables['past_min'], variables['past_max'], args)
-
-                    #
-                    #else:
-                    #last_candle_processed = self.candle_process(variables, df, args)
-                else:
-                    last_candle_processed = self.candle_process(variables, df, args)
-
-        self.plot_figure(fig, variables, df, args)
-        self.plot_fibo_zones(df, fig, ax, variables, args)
-        #for each row
-        #self.plot_wb(df, fig, ax, args)
-        #self.plot_fibo(df.iloc[-9*60:], fig, ax, variables['past_min'], variables['past_max'], args)
-
-    def update_fibo(self, df, metadata, direction):
-
-        #le nouveau min en zone down - eco
-
-
-
-
-
-#        if len(df) >= 60:
-#            rolling_min  = df.low.rolling(60).min()
-#            if not np.isnan(rolling_min.values[-1]):
-#                     metadata['min'] = rolling_min.values[-1]
-#            else:
-#                metadata['min'] = df.iloc[-1].low.values[-1]
-
-#            rolling_max = df.high.rolling(60).max()
-#            if not np.isnan( rolling_max.values[-1]):
-#                metadata['max'] = rolling_max.values[-1]
-#            else:
-#                metadata['max'] = df.iloc[-1].high.values[-1]
-#        next_min = metadata['min']
-#        next_max = metadata['max']
-
-        self.set_fibo(df, metadata, df.low.min() , df.high.max())
-
-        metadata['signal'] = 'FIBO'
-
-
-    def get_fibo_zone(self, df, metadata, price):
-        if price > metadata['fibo_zones'][0]:
-            return 'lmoon'
-        if price < metadata['fibo_zones'][0] and price >= metadata['fibo_zones'][1]:
-            return 'l886_up'
-
-        if price < metadata['fibo_zones'][1] and price >= metadata['fibo_zones'][2]:
-            return 'l786_up'
-
-        if price < metadata['fibo_zones'][2] and price >= metadata['fibo_zones'][3]:
-            return 'l618_up'
-
-        if price < metadata['fibo_zones'][3] and price >= metadata['fibo_zones'][4]:
-            return 'l5_up'
-
-        if price <= metadata['fibo_zones'][4] and price > metadata['fibo_zones'][5]:
-            return 'l382_massive_profit_up'
-
-        if price <= metadata['fibo_zones'][5] and price > metadata['fibo_zones'][6]:
-            return 'l236_up'
-
-        if price <= metadata['fibo_zones'][6] and price > metadata['fibo_zones'][7]: #fin max
-            return 'l114_up'
-
-        if price <= metadata['fibo_zones'][7] and price > metadata['fibo_zones'][8]:
-            return 'l114_down'
-
-        if price <= metadata['fibo_zones'][8] and price > metadata['fibo_zones'][9]:
-            return 'l236_down'
-
-        if price <= metadata['fibo_zones'][9] and price > metadata['fibo_zones'][10]:
-            return 'l382_take_profit_down'
-
-        if price <= metadata['fibo_zones'][10] and price > metadata['fibo_zones'][11]:
-            return 'l5_down'
-
-        if price <= metadata['fibo_zones'][11] and price > metadata['fibo_zones'][12]:
-            return 'l618_1class_down'
-
-        if price < metadata['fibo_zones'][13] and price > metadata['fibo_zones'][14]:
-            return 'l786_eco_class_down'
-
-        if price <= metadata['fibo_zones'][14] and price > metadata['fibo_zones'][15]:
-            return 'l886_down'
-
-        if price < metadata['fibo_zones'][15]:
-            return 'lground'
-
-
-    def set_fibo(self, df, metadata, min, max):
-       # if metadata['onPosition'] == True:
-       #     return
-
-        past_min = min
-        past_max = max
-
-        metadata['past_min'] = past_min
-        metadata['past_max'] = past_max
-        #past_max = df.close.rolling(2 * 60).max()
-
-
-        price_min = metadata['past_min']
-        price_max = metadata['past_max']
-
-        # Fibonacci Levels considering original trend as upward move
-        # Fibonacci Levels considering original trend as upward move
-        diff = price_max - price_min
-        metadata['fibo_zones'] = []
-        metadata['l886_up'] = price_max + 0.886 * diff
-        metadata['fibo_zones'].append( metadata['l886_up'])
-        metadata['l786_up'] = price_max + 0.786 * diff
-        metadata['fibo_zones'].append(metadata['l786_up'])
-        metadata['l618_up'] = price_max + 0.618 * diff
-        metadata['fibo_zones'].append(metadata['l618_up'])
-        metadata['l5_up']   = price_max + 0.5 * diff
-        metadata['fibo_zones'].append(metadata['l5_up'] )
-        metadata['l382_massive_profit_up'] = price_max + 0.382 * diff
-        metadata['fibo_zones'].append(metadata['l382_massive_profit_up'])
-        metadata['l236_up'] = price_max + 0.236 * diff
-        metadata['fibo_zones'].append(metadata['l236_up'])
-        metadata['l114_up'] = price_max + 0.114 * diff
-        metadata['fibo_zones'].append(metadata['l114_up'])
-        metadata['max'] = price_max
-        metadata['fibo_zones'].append(metadata['max'])
-        metadata['l114_down'] = price_max - 0.114 * diff
-        metadata['fibo_zones'].append(metadata['l114_down'])
-        metadata['l236_down'] = price_max - 0.236 * diff
-        metadata['fibo_zones'].append(metadata['l236_down'])
-        metadata['l382_take_profit_down'] = price_max - 0.382 * diff
-        metadata['fibo_zones'].append(metadata['l382_take_profit_down'])
-        metadata['l5_down'] = price_max - 0.5 * diff
-        metadata['fibo_zones'].append(metadata['l5_down'])
-        metadata['l618_1class_down'] = price_max - 0.618 * diff
-        metadata['fibo_zones'].append(metadata['l618_1class_down'])
-        metadata['l786_eco_class_down'] = price_max - 0.786 * diff
-        metadata['fibo_zones'].append(metadata['l786_eco_class_down'])
-        metadata['l886_down'] = price_max - 0.886 * diff
-        metadata['fibo_zones'].append(metadata['l886_down'])
-        metadata['min'] = price_min
-        metadata['fibo_zones'].append(metadata['min'])
-
-        print(metadata['clock'], metadata['l786_eco_class_down'],metadata['l382_massive_profit_up'] )
-
-    def candle_process(self, variables, dataframe, args):
-        last_candle = dataframe.iloc[-1]
-        x_data = dataframe.index.tolist()  # the index will be our x axis, not date
-        y_data_low = dataframe['low']
-        y_data_close= dataframe['close']
-        y_data_pivot = (last_candle.high - last_candle.low) / 2
-
-
-        # x values for the polynomial fit, 200 points
-
-        x = np.linspace(0, max(dataframe.index.tolist()), max(dataframe.index.tolist()) + 1)
-        variables['x-data-time'].append(dataframe['otime'].tolist())
-
-        # polynomial fit of degree xx
-        pol = np.polyfit(x_data, y_data_close, 21) #31)
-        data = np.polyval(pol, x)
-        #variables['pol'] = data
-
-        #pol-pivot = np.polyfit(x_data, y_data_pivot, 21) #31)
-        #data_pivot = np.polyval(pol, x)
-        #variables['pol-pivot'] = data_pivot
-
-        #           ___ detection of local minimums and maximums ___
-
-        min_max = np.diff(np.sign(np.diff(data))).nonzero()[0] + 1  # local min & max
-        l_min = (np.diff(np.sign(np.diff(data))) > 0).nonzero()[0] + 1  # local min
-        l_max = (np.diff(np.sign(np.diff(data))) < 0).nonzero()[0] + 1  # local max
-
-
-        variables['x_data'] = x_data
-        variables['y_data'] = y_data_close
-        variables['x'] = x
-        variables['y_pol'] = data
-
-
-        #_pol = Decimal( str(data[-1]).split('.')[0] + '.' +
-        #                str(data[-1]).split('.')[1][0:len(str(last_candle.close).split('.')[1])-2])
-
-        pol_decimal = Decimal(str(data[-1]).split('.')[0] + '.' +
-                str(data[-1]).split('.')[1][0:len(str(last_candle.close).split('.')[1]) - 2])
-        variables['pol'].append(pol_decimal)
-        dataframe['pol'] =  pol_decimal
-
-        if len(dataframe) > 5:
-            dataframe['pol_mean'] = dataframe['pol'].rolling(5).mean()
-            #variables['pol_mean'].append(dataframe['pol_mean'].iloc[-1])
-
-        #if len(dataframe) > 60:
-            #variables['pol-5'].append(variables['y_pol'][-5])#pol_T = T.fit(x_data, y_data, 31)
-            #variables['pol-10'].append(variables['y_pol'][-10])
-            #variables['pol-15'].append(variables['y_pol'][-15])
-            #variables['pol-20'].append(variables['y_pol'][-20])
-            #variables['pol-30'].append(variables['y_pol'][-30])  # pol_T = T.fit(x_data, y_data, 31)
-            #variables['pol-60'].append(variables['y_pol'][-60])
-        #if len(min_max) > 2:
-        #    dataframe['valid'] = np.where( min_max[-1] - min_max[-2] > 10  ,1, 0)
-        # if trend > 0 and trend(-1)  < 0 -> start  buying
-
-
-        if variables['started'] == True and len(data) > 2 and len(variables['pol_mean']) > 2:
-            if  data[-1] > data[-2]:
-                variables['trend'].append('UP')
-
-            if  data[-1] < data[-2]:
-                # get the amount of bitcoin we have in our account
-                variables['trend'].append('DOWN')
-
-
-            if variables['pol_mean'][-1] >  variables['pol_mean'][-2]:
-                variables['signal'] = 'BUY'
-                variables['action'] = 'SELLING'
-
-
-            if variables['pol_mean'][-1] <  variables['pol_mean'][-2]:
-                variables['signal'] = 'SELL'
-                variables['action'] = 'BUYING'
-
-
-            #if len(dataframe) > 5 and self.plot_wb(df, fig, ax, args):
-            #if variables['trend'][-1] == 'UP' and  last_candle.close < variables['pol'][-1]:
-            #    variables['signal'] = 'BUY'
-
-
-            #if variables['trend'][-1] == 'DOWN' and  variables['trend'][-2] == 'UP':
-            #    variables['signal'] = 'SELL'
-
-
-            #if variables['signal'] == 'BUYING' and variables['pol']['-1'] < variables['pol'][-2]:
-            #    variables['signal'] = 'BUY'
-
-            #if variables['signal'] == 'SELLING' and variables['pol']['-1'] > variables['pol'][-2]:
-            #    variables['signal'] = 'SELL'
-
-            # if variables.signal == 'BUYING' and variables.onPosition == False:
-            #print(variables['trend'],dataframe.iloc[-1]['close'])
-            # -1 100.00559
-            # -4 100.01088
-
+        print('trend', variables['trend'][-1], mean_values[-1], variables['signal'] )
         return last_candle
 
 def interactive_shell():
